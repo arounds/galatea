@@ -11,7 +11,7 @@ import com.google.cloud.sql.jdbc.Connection;
 import com.google.cloud.sql.jdbc.ResultSet;
 
 
-public abstract class Database {
+public abstract class DatabaseController {
     //This class contains all the methods required to access the database in anyway. 
 	
 	//Methods for Accessing the database

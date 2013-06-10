@@ -4,7 +4,7 @@ import java.util.Calendar;
 public class InterviewingEvent {
 	//Attributes
 	protected Calendar eventDate;
-	protected Calendar updateTime;
+	protected final Calendar _updateTime;
 	protected String type;
 	protected String status;
 	protected List<InterviewEvaluation> listOfInterviewEvals;
@@ -16,7 +16,7 @@ public class InterviewingEvent {
 			String inputType, String inputStatus, 
 			List<InterviewEvaluation> interviewEvals){
 		eventDate = inputEventDate;
-		updateTime = inputUpdateTime;
+		_updateTime = inputUpdateTime;
 		type = inputType;
 		status = inputStatus;
 		listOfInterviewEvals = interviewEvals;
@@ -32,7 +32,7 @@ public class InterviewingEvent {
 	}
 
 	public Calendar getUpdateTime(){
-		return updateTime;
+		return _updateTime;
 	}
 	
 	public String getType(){

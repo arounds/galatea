@@ -1,4 +1,4 @@
-import java.util.GregorianCalendar;
+import java.util.Calendar;
 
 public class Entity {
 	//Attributes
@@ -15,7 +15,7 @@ public class Entity {
 		protected String zipCode;
 		protected String country;
 		protected String status;
-		protected GregorianCalendar updateTime;
+		protected final Calendar _updateTime;
 	
 	//Constructors
 		public Entity(String inputName, String inputType, String inputWebsite, 
@@ -25,7 +25,7 @@ public class Entity {
 				String inputContactPersonPhone, 
 				String inputStreetAddress, String inputCity, 
 				String inputState, String inputZipCode, String inputCountry,
-				String inputStatus, GregorianCalendar inputUpdateTime){
+				String inputStatus, Calendar inputUpdateTime){
 			name = inputName;
 			type = inputType;
 			website = inputWebsite;
@@ -39,7 +39,7 @@ public class Entity {
 			zipCode = inputZipCode;
 			country = inputCountry;
 			status = inputStatus;
-			updateTime = inputUpdateTime;
+			_updateTime = inputUpdateTime;
 		}
 		
 	//Methods
@@ -147,8 +147,8 @@ public class Entity {
 			status = x;
 		}
 		
-		public GregorianCalendar getUpdateTime(){
-			return updateTime;
+		public Calendar getUpdateTime(){
+			return _updateTime;
 		}
 
 }

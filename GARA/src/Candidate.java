@@ -63,7 +63,7 @@ public class Candidate extends Person{
 		str.append(zipCode);
 		str.append(country);
 		str.append(status);
-		str.append(updateTime);
+		str.append(_updateTime);
 		
 		value = str.toString();
 		

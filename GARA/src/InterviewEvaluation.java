@@ -1,29 +1,28 @@
-import java.util.GregorianCalendar;
-
+import java.util.Calendar;
 
 public class InterviewEvaluation {
 	//Attributes
 	protected String interviewerFirstName;
 	protected String interviewerLastName;
 	protected String evaluationFileID;
-	protected Calendar updateTime;
+	protected final Calendar _updateTime;
 	
 	//Constructors
 	public InterviewEvaluation(Calendar update){
-		updateTime = update;
+		_updateTime = update;
 	}
 	
 	public InterviewEvaluation(String firstName, String lastName, Calendar update){
 		interviewerFirstName = firstName;
 		interviewerFirstName = lastName;
-		updateTime = update;
+		_updateTime = update;
 	}
 	
-	public InterviewEvaluation(String firstName, String lastName, String fileId, GregorianCalendar update){
+	public InterviewEvaluation(String firstName, String lastName, String fileId, Calendar update){
 		interviewerFirstName = firstName;
 		interviewerLastName = lastName;
 		evaluationFileID = fileId;
-		updateTime = update;
+		_updateTime = update;
 	}
 	
 	//Methods
@@ -52,7 +51,7 @@ public class InterviewEvaluation {
 	}
 	
 	public Calendar getUpdateTime(){
-		return updateTime;
+		return _updateTime;
 	}
 	
 }

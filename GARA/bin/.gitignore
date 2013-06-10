@@ -9,3 +9,15 @@
 /RecruitingEvent.class
 /SchedulingEntry.class
 /google_sql.jar
+/ViewInterface.class
+/ControllerInterface.class
+/SchedulingEventFactory.class
+/Factory.class
+/PersonFactory.class
+/EntityFactory.class
+/RecruitingEventFactory.class
+/InterviewingEventAndEvalFactory.class
+/ConsoleView.class
+/ApplicationController.class
+/Main.class
+/DatabaseController.class

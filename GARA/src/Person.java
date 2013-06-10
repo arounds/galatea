@@ -18,13 +18,13 @@ public abstract class Person{
 		protected String zipCode;
 		protected String country;
 		protected String status;
-		protected Calendar updateTime;
+		protected final Calendar _updateTime;
 		
 	//Constructors
 		public Person(String first, String last, Calendar inputUpdateTime){
 			firstName = first;
 			lastName = last;
-			updateTime = inputUpdateTime;
+			_updateTime = inputUpdateTime;
 		}
 		
 		public Person(String inputFirst, String inputMiddle, String inputLast, 
@@ -45,7 +45,7 @@ public abstract class Person{
 			zipCode = inputZipCode;
 			country = inputCountry;
 			status = inputStatus;
-			updateTime = inputUpdateTime;
+			_updateTime = inputUpdateTime;
 		}
 		
 	//Methods
@@ -155,6 +155,6 @@ public abstract class Person{
 		}
 		
 		public Calendar getUpdateTime(){
-			return updateTime;
+			return _updateTime;
 		}
 }

@@ -7,20 +7,16 @@ import java.util.LinkedList;
 
 
 
-public class View{
-	public static void main(String[] args) throws SQLException, IOException, ParseException{
+public class ConsoleView {
+	
 		//Declarations
-		Database.registerDriver(); //Must happen, but only happens once per application.
+		ControllerInterface applicationManager;
+		//DatabaseController.registerDriver(); //Must happen but only once
 		String action = "0";
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		
-		//Greetings
-		printGreeting();
-		printMenu(); //There are currently options 1-6
-		
-		//Call proper program
-		action = in.readLine();
-		
+	public void actionPerformed() throws IOException{	
+		String action = in.readLine();
 		switch (action){
 			case "exit":
 				System.out.printf("%nThanks!");
@@ -31,7 +27,7 @@ public class View{
 				break;
 			case "1":
 				System.out.printf("%nView Scheduling Entry"); //for debugging
-				getSchedulingEntries(in);
+				//applicationManager.getSchedulingEntries();
 				printMenu();
 				break;
 			case "2":
@@ -60,14 +56,11 @@ public class View{
 				printMenu();
 				break;
 			default: //In case the user enters something invalid
-				System.out.printf("%nSorry, I didn't catch that...Try again."); 
+				System.out.printf("%nTry again."); 
 				printMenu();
-		}
-		
-		
+		}	
 	}
 	
-	//Methods
 	
 	protected static void printGreeting(){
 		System.out.printf("Welcome to My Application %n");
@@ -93,7 +86,7 @@ public class View{
 	}
 	
     protected static void getSchedulingEntries(BufferedReader in) throws ParseException, SQLException, IOException{
-    	LinkedList<SchedulingEntry> schedulingEntries = Database.callSelectSchedulingEntry();
+    	LinkedList<SchedulingEntry> schedulingEntries = DatabaseController.callSelectSchedulingEntry();
     	String action;
     	
     	System.out.printf(
