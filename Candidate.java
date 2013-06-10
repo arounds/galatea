@@ -2,7 +2,7 @@ import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 public class Candidate extends Person{
-  //Attributes
+	//Attributes
 		//Events
 		protected RecruitingEvent recruitingEvent;
 		protected LinkedList<InterviewingEvent> listOfInterviewingEvents;
