@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 
 
-public class Controller{
+public class View{
 	public static void main(String[] args) throws SQLException, IOException, ParseException{
 		//Declarations
 		Database.registerDriver(); //Must happen, but only happens once per application.
