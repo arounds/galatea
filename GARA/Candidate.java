@@ -1,5 +1,5 @@
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
+import java.util.List;
 
 public class Candidate extends Person{
 	//Attributes
