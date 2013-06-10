@@ -2,7 +2,7 @@ import java.awt.List;
 import java.util.GregorianCalendar;
 
 public class SchedulingEntry {
-  //Attributes
+	//Attributes
 	protected String candidateFirstName;
 	protected String candidateLastName;
 	protected String currentInterviewType;

@@ -2,10 +2,10 @@ import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 public class Candidate extends Person{
-  //Attributes
+	//Attributes
 		//Events
 		protected RecruitingEvent recruitingEvent;
-		protected LinkedList<InterviewingEvent> listOfInterviewingEvents;
+		protected List<InterviewingEvent> listOfInterviewingEvents;
 		protected String resumeFileId;
 	
 	//Constructors
@@ -19,13 +19,12 @@ public class Candidate extends Person{
 				String inputPhone, String inputStreetAddress, String inputCity,
 				String inputState, String inputZipCode, String inputCountry, 
 				String inputStatus, GregorianCalendar inputUpdateTime, 
-				RecruitingEvent inputRecruitingEvent, LinkedList<InterviewingEvent> interviewingEvents){
+				RecruitingEvent inputRecruitingEvent, List<InterviewingEvent> interviewingEvents){
 			super(inputFirst, inputMiddle, inputLast, inputMaiden, inputPreferred,
 					inputEmail, inputPhone, inputStreetAddress, inputCity,
 					inputState, inputZipCode, inputCountry, inputStatus, 
 					inputUpdateTime);
 			recruitingEvent = inputRecruitingEvent;
-			listOfInterviewingEvents = interviewingEvents;
 		}
 	
 	//Methods
@@ -38,8 +37,7 @@ public class Candidate extends Person{
 		recruitingEvent = event;
 	}
 	
-	public LinkedList<InterviewingEvent> getInterviewingEvents(){
-	    return listOfInterviewingEvents;
+	public List<InterviewingEvent> getInterviewingEvents(){
 	}
 	
 	public void addInterviewingEvent(InterviewingEvent event){

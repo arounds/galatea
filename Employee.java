@@ -2,7 +2,7 @@ import java.util.GregorianCalendar;
 
 
 public class Employee extends Person{
-  //Attributes
+	//Attributes
 		protected String contractFileId;
 		
 	//Constructors
