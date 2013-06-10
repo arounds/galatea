@@ -8,7 +8,7 @@ public class InterviewingEvent {
 	protected GregorianCalendar updateTime;
 	protected String type;
 	protected String status;
-	protected List listOfInterviewEvaluations;
+	protected List<InterviewEvaluation> listOfInterviewEvaluations;
 	
 	//Constructors
 	public InterviewingEvent(GregorianCalendar inputUpdateTime, String inputType, 
