@@ -6,14 +6,14 @@ public class InterviewEvaluation {
 	protected String interviewerFirstName;
 	protected String interviewerLastName;
 	protected String evaluationFileID;
-	protected GregorianCalendar updateTime;
+	protected Calendar updateTime;
 	
 	//Constructors
-	public InterviewEvaluation(GregorianCalendar update){
+	public InterviewEvaluation(Calendar update){
 		updateTime = update;
 	}
 	
-	public InterviewEvaluation(String firstName, String lastName, GregorianCalendar update){
+	public InterviewEvaluation(String firstName, String lastName, Calendar update){
 		interviewerFirstName = firstName;
 		interviewerFirstName = lastName;
 		updateTime = update;
@@ -51,7 +51,7 @@ public class InterviewEvaluation {
 		evaluationFileID = x;
 	}
 	
-	public GregorianCalendar getUpdateTime(){
+	public Calendar getUpdateTime(){
 		return updateTime;
 	}
 	

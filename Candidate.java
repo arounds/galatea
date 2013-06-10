@@ -5,7 +5,7 @@ public class Candidate extends Person{
 	//Attributes
 		//Events
 		protected RecruitingEvent recruitingEvent;
-		protected List<InterviewingEvent> listOfInterviewingEvents;
+		protected List listOfInterviewingEvents;
 		protected String resumeFileId;
 	
 	//Constructors
@@ -19,7 +19,7 @@ public class Candidate extends Person{
 				String inputPhone, String inputStreetAddress, String inputCity,
 				String inputState, String inputZipCode, String inputCountry, 
 				String inputStatus, GregorianCalendar inputUpdateTime, 
-				RecruitingEvent inputRecruitingEvent, List<InterviewingEvent> interviewingEvents){
+				RecruitingEvent inputRecruitingEvent, List interviewingEvents){
 			super(inputFirst, inputMiddle, inputLast, inputMaiden, inputPreferred,
 					inputEmail, inputPhone, inputStreetAddress, inputCity,
 					inputState, inputZipCode, inputCountry, inputStatus, 

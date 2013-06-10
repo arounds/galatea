@@ -1,5 +1,5 @@
-import java.awt.List;
-import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Calendar;
 import java.util.LinkedList;
 
 public class InterviewingEvent {
@@ -8,26 +8,19 @@ public class InterviewingEvent {
 	protected GregorianCalendar updateTime;
 	protected String type;
 	protected String status;
-	protected List<InterviewEvaluation> listOfInterviewEvaluations;
+	protected List<InterviewEvaluation> listOfInterviewEvals;
 	
 	//Constructors
-	public InterviewingEvent(GregorianCalendar inputUpdateTime, String inputType, 
-			String inputStatus){
-		//define eventDateTime
-		updateTime = inputUpdateTime;
-		type = inputType;
-		status = inputStatus;
-		//define listOfInterviewEvals
-	}
 	
-	public InterviewingEvent(GregorianCalendar inputEventDate, GregorianCalendar inputUpdateTime, 
+	public InterviewingEvent(Calendar inputEventDate, 
+			Calendar inputUpdateTime, 
 			String inputType, String inputStatus, 
 			List interviewEvals){
 		eventDate = inputEventDate;
 		updateTime = inputUpdateTime;
 		type = inputType;
 		status = inputStatus;
-		listOfInterviewEvaluations = interviewEvals;
+		listOfInterviewEvals = interviewEvals;
 	}
 	
 	//Methods
@@ -60,10 +53,10 @@ public class InterviewingEvent {
 	}
 	
 	public List getListOfInterviewEvaluations(){
-		return listOfInterviewEvaluations;
+		return listOfInterviewEvals;
 	}
 	
 	public void addInterviewEval(InterviewEvaluation eval){
-		listOfInterviewEvaluations.add(eval);
+		listOfInterviewEvals.add(eval);
 	}
 }
