@@ -1,6 +1,6 @@
 import java.util.Calendar;
 
-public abstract class Person{
+public class Person{
 	//Attributes
 		//Names
 	    protected String id;
@@ -21,9 +21,7 @@ public abstract class Person{
 		protected final Calendar _updateTime;
 		
 	//Constructors
-		public Person(String first, String last, Calendar inputUpdateTime){
-			firstName = first;
-			lastName = last;
+		public Person(Calendar inputUpdateTime){
 			_updateTime = inputUpdateTime;
 		}
 		

@@ -9,9 +9,8 @@ public class Candidate extends Person{
 		protected String resumeFileId;
 	
 	//Constructors
-		public Candidate(String first, String last, 
-				Calendar update){
-			super(first, last, update);
+		public Candidate(Calendar update){
+			super(update);
 		}
 		
 		public Candidate(String inputFirst, String inputMiddle, String inputLast, 

@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 
@@ -6,8 +7,8 @@ public class Employee extends Person{
 		protected String contractFileId;
 		
 	//Constructors
-	Employee(String first, String last, GregorianCalendar update){
-		super(first, last, update);
+	Employee(Calendar update){
+		super(update);
 	}
 	
 	Employee(String inputFirst, String inputMiddle, String inputLast, 
