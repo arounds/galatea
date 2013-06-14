@@ -5,10 +5,7 @@ public class Entity {
 		protected String name;
 		protected String type;
 		protected String website;
-		protected String contactPersonFirstName;
-		protected String contactPersonLastName;
-		protected String contactPersonEmail;
-		protected String contactPersonPhone;
+		protected Recruiter contact;
 		protected String streetAddress;
 		protected String city;
 		protected String state;
@@ -18,28 +15,22 @@ public class Entity {
 		protected final Calendar _updateTime;
 	
 	//Constructors
-		public Entity(String inputName, String inputType, String inputWebsite, 
-				String inputContactPersonFirstName, 
-				String inputContactPersonLastName,
-				String inputContactPersonEmail, 
-				String inputContactPersonPhone, 
-				String inputStreetAddress, String inputCity, 
-				String inputState, String inputZipCode, String inputCountry,
-				String inputStatus, Calendar inputUpdateTime){
-			name = inputName;
-			type = inputType;
-			website = inputWebsite;
-			contactPersonFirstName = inputContactPersonFirstName;
-			contactPersonLastName = inputContactPersonLastName;
-			contactPersonEmail = inputContactPersonEmail;
-			contactPersonPhone = inputContactPersonPhone;
-			streetAddress = inputStreetAddress;
-			city = inputCity;
-			state = inputState;
-			zipCode = inputZipCode;
-			country = inputCountry;
-			status = inputStatus;
-			_updateTime = inputUpdateTime;
+		public Entity(String name, String type, String website, 
+				Recruiter contact,
+				String streetAddress, String city, 
+				String state, String zipCode, String country,
+				String status, Calendar updateTime){
+			this.name = name;
+			this.type = type;
+			this.website = website;
+			this.contact = contact;
+			this.streetAddress = streetAddress;
+			this.city = city;
+			this.state = state;
+			this.zipCode = zipCode;
+			this.country = country;
+			this.status = status;
+			this._updateTime = updateTime;
 		}
 		
 	//Methods
@@ -47,104 +38,80 @@ public class Entity {
 			return name;
 		}
 		
-		public void setName(String x){
-			name = x;
+		public void setName(String name){
+			this.name = name;
 		}
 		
 		public String getType(){
 			return type;
 		}
 		
-		public void setType(String x){
-			type = x;
+		public void setType(String type){
+			this.type = type;
 		}
 		
 		public String getWebsite(){
 			return website;
 		}
 		
-		public void setWebsite(String x){
-			website = x;
+		public void setWebsite(String website){
+			this.website = website;
 		}
 		
-		public String getContactPersonFirstName(){
-			return contactPersonFirstName;
+		public Recruiter getContact(){
+			return contact;
 		}
 		
-		public void setContactPersonFirstName(String x){
-			contactPersonFirstName = x;
-		}
-		
-		public String getContactPersonLastName(){
-			return contactPersonLastName;
-		}
-		
-		public void setContactPersonLastName(String x){
-			contactPersonLastName = x;
-		}
-		
-		public String getContactPersonEmail(){
-			return contactPersonEmail;
-		}
-		
-		public void setContactPersonEmail(String x){
-			contactPersonEmail = x;
-		}
-		
-		public String getContactPersonPhone(){
-			return contactPersonPhone;
-		}
-		
-		public void setContactPersonPhone(String x){
-			contactPersonPhone = x;
+		public void setContact(Recruiter contact){
+			this.contact =  contact;
 		}
 		
 		public String getStreetAddress(){
 			return streetAddress;
 		}
 		
-		public void setStreetAddress(String x){
-			streetAddress = x;
+		public void setStreetAddress(String streetAddress){
+			this.streetAddress = streetAddress;
 		}
 		
 		public String getCity(){
 			return city;
 		}
 		
-		public void setCity(String x){
-			city = x;
+		public void setCity(String city){
+			this.city = city;
 		}
 		
 		public String getState(){
 			return state;
 		}
 		
-		public void setState(String x){
-			state = x;
+		public void setState(String state){
+			this.state = state;
 		}
 	 
 		public String getZipCode(){
 			return zipCode;
 		}
 		
-		public void setZipCode(String x){
-			zipCode = x;
+		public void setZipCode(String zipCode){
+			this.zipCode = zipCode;
 		}
 		
 		public String getCountry(){
 			return country;
 		}
 		
-		public void setCountry(String x){
-			country = x;
+		public void setCountry(String country){
+			this.country = country;
 		}
 		
 		public String getStatus(){
 			return status;
 		}
 		
-		public void setStatus(String x){
-			status = x;
+		public void setStatus(String status){
+			this.status = status;
 		}
 		
 		public Calendar getUpdateTime(){

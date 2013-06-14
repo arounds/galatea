@@ -15,29 +15,27 @@ public class PersonFactory{
 			String email, String phone, 
 			String streetAddress, String city, 
 			String state, String zipCode, String country, 
-			String status, List<RecruitingEvent> listREvents, String docFileId, 
+			String status, RecruitingEvent rEvent, String docFileId, 
 			String personType) {
-		Calendar updateTime = new GregorianCalendar();
+		//Variables
+		Calendar updateTime;
 		Person person;
+		CallableStatement stmt;
+		String doc_id;
 		
-		if (personType.equals("candidate")) {
-			person = new Candidate(updateTime);
-		}
-		else if (personType.equals("employee")){
-			person = new Employee(updateTime);
-		}
-		else if (personType.equals("recruiter")){
-			person = new Person(updateTime);
-		}
-		else {
-			return null; //I want there to be an error here
-		}
+		//Check if person is in the database
 		
-		person.setFirstName(firstName);
-		person.setMiddleName(middleName);
-		person.setLastName(lastName);
-		//TODO continue
 		
+		
+		//Create the document and get the id
+		
+		
+		//Insert the person into the database
+		stmt = prepareInsert(firstName, middleName, lastName, maidenName, preferredName, personType, email, phone, streetAddress, city, state, zipCode, country, rEvent.DBid, doc_id, status)
+		
+		//Create the Person object
+		
+		//Return the created person
 		return person;
 	}
 
@@ -57,27 +55,31 @@ public class PersonFactory{
 		return null;
 	}
 
-	public CallableStatement prepareInsert(Person person, String personType, String doc_id, String rEvent_id) throws SQLException{
+	public CallableStatement prepareInsert(String firstName, String middleName, String lastName, 
+			String maidenName, String preferredName, String personType, String email, String phone, 
+			String streetAddress, String city, 
+			String state, String zipCode, String country, String rEvent_id, String doc_id, 
+			String status) throws SQLException{
 		
 		    Connection conn = DatabaseManager.getConnection();
 			
 			CallableStatement stmt = conn.prepareCall("{CALL insertPerson(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-			stmt.setString(1, person.firstName);
-			stmt.setString(2, person.middleName);
-			stmt.setString(3, person.lastName);
-			stmt.setString(4, person.maidenName);
-			stmt.setString(5, person.preferredName);
+			stmt.setString(1, firstName);
+			stmt.setString(2, middleName);
+			stmt.setString(3, lastName);
+			stmt.setString(4, maidenName);
+			stmt.setString(5, preferredName);
 			stmt.setString(6, personType);
-			stmt.setString(7, person.email);
-			stmt.setString(8, person.phone);
-			stmt.setString(9, person.streetAddress);
-			stmt.setString(10, person.city);
-			stmt.setString(11, person.state);
-			stmt.setString(12, person.zipCode);
-			stmt.setString(13, person.country);
+			stmt.setString(7, email);
+			stmt.setString(8, phone);
+			stmt.setString(9, streetAddress);
+			stmt.setString(10, city);
+			stmt.setString(11, state);
+			stmt.setString(12, zipCode);
+			stmt.setString(13, country);
 			stmt.setString(14, doc_id);
 			stmt.setString(15, rEvent_id);
-			stmt.setString(16, person.status);
+			stmt.setString(16, status);
 			
 			return stmt;
 	}
