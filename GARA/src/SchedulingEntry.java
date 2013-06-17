@@ -1,5 +1,5 @@
-import java.awt.List;
-import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Calendar;
 
 public class SchedulingEntry {
 	//Attributes
@@ -7,15 +7,15 @@ public class SchedulingEntry {
 	protected String candidateLastName;
 	protected String currentInterviewType;
 	protected String currentInterviewStatus;
-	protected GregorianCalendar currentInterviewDateTime;
-	protected GregorianCalendar currentInterviewUpdateTime;
-	protected List currentInterviewers;
+	protected Calendar currentInterviewDateTime;
+	protected Calendar currentInterviewUpdateTime;
+	protected List<Employee> currentInterviewers;
 	
 	//Constructors
 	public SchedulingEntry(String firstName, String lastName,
 			String interviewType, String interviewStatus, 
-			GregorianCalendar interviewDate, GregorianCalendar interviewUpdateTime,
-			List interviewers){
+			Calendar interviewDate, Calendar interviewUpdateTime,
+			List<Employee> interviewers){
 		candidateFirstName = firstName;
 		candidateLastName = lastName;
 		currentInterviewType = interviewType;
@@ -58,24 +58,24 @@ public class SchedulingEntry {
 		currentInterviewStatus = input;
 	}
 	
-	public GregorianCalendar getCurrentInterviewDateTime(){
+	public Calendar getCurrentInterviewDateTime(){
 		return currentInterviewDateTime;
 	}
 	
-	public void setCurrentInterviewDateTime(GregorianCalendar input){
+	public void setCurrentInterviewDateTime(Calendar input){
 		currentInterviewDateTime = input;
 	}
 	
-	public GregorianCalendar getCurrentInterviewUpdateTime(){
+	public Calendar getCurrentInterviewUpdateTime(){
 		return currentInterviewUpdateTime;
 	}
 	
-	public List getCurrentInterviewers(){
+	public List<Employee> getCurrentInterviewers(){
 		return currentInterviewers;
 	}
 	
-	public void addCurrentInterviewer(){
-		//add an interviewer to the list...
+	public void addCurrentInterviewer(Employee interviewer){
+		currentInterviewers.add(interviewer);
 	}
 	
 	

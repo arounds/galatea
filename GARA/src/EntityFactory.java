@@ -1,24 +1,44 @@
+import java.sql.SQLException;
+
 import com.google.cloud.sql.jdbc.CallableStatement;
 import com.google.cloud.sql.jdbc.ResultSet;
 
 
-public class EntityFactory implements Factory{
+public class EntityFactory {
 
-	@Override
-	public <Entity> Entity createNew() {
-		Entity entity = null;
-		CallableStatement stmt;
-		ResultSet rs;
+	public Entity createNew(String name, String type, Person contact, 
+			String streetAddress, String city, String state, String zip, String country, 
+			String status, Boolean override) throws SQLException {
 		
-		// TODO write code to create an Entity object
-		//
-		//stmt = prepareInsert(Entity);
-		//rs = DatabaseManager.callStatement(stmt);
+		ResultSet rs;
+		//Check DB for Entity name
+		rs = callDoesEntityNameExist(name);
+		Integer entity_id;
+		while (rs.next()){
+			entity_id = rs.getInt("id");
+		}
+		
+		if (entity_id != null){
+			if (! override){
+				throw new Exception("Entity already exists");
+			}
+		}
+		
+		rs = null;
+		
+		rs = PersonFactory.
+
 		
 		return entity;
 	}
 
-	@Override
+
+	public ResultSet callDoesEntityNameExist(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	public <Entity> Entity updateExisting() {
 		Entity entity = null;
 		
@@ -28,25 +48,25 @@ public class EntityFactory implements Factory{
 		return entity;
 	}
 
-	@Override
+
 	public <A> A getExisting() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public CallableStatement prepareInsert(Entity entity) {
+
+	public ResultSet insertEntity(String name, String type, String contact_id, String streetAddress, String city, String state, String zip, String country, String status) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+
 	public CallableStatement prepareUpdate() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+
 	public CallableStatement prepareSelect() {
 		// TODO Auto-generated method stub
 		return null;

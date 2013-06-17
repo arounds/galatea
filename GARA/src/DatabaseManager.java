@@ -6,7 +6,7 @@ import com.google.cloud.sql.jdbc.ResultSet;
 
 
 public class DatabaseManager {
-	
+
 	public static void registerDriver() throws SQLException{
 		DriverManager.registerDriver(new com.google.cloud.sql.Driver());
 	}
@@ -16,7 +16,7 @@ public class DatabaseManager {
 		return conn;
 	}
 	
-	public ResultSet callStatement(CallableStatement stmt) throws SQLException{
+	public static ResultSet callStatement(CallableStatement stmt) throws SQLException{
 		stmt.execute();
 		ResultSet rs = (ResultSet) stmt.getResultSet();
 		return rs;

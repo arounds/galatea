@@ -1,6 +1,8 @@
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
+import com.google.cloud.sql.jdbc.CallableStatement;
+
 public class RecruitingEvent {
 	//Attributes
 	protected GregorianCalendar eventDate;
@@ -57,6 +59,11 @@ public class RecruitingEvent {
 	
 	public void addAttendee(Employee emp){
 		listOfAttendees.add(emp);
+	}
+
+	public static CallableStatement prepareGetID(RecruitingEvent rEvent) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
