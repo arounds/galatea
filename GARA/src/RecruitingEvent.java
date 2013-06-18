@@ -1,48 +1,58 @@
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
+import java.util.List;
 
 import com.google.cloud.sql.jdbc.CallableStatement;
+import com.google.cloud.sql.jdbc.ResultSet;
 
 public class RecruitingEvent {
 	//Attributes
-	protected GregorianCalendar eventDate;
-	protected GregorianCalendar updateTime;
+	protected Calendar eventDate;
+	protected Calendar updateTime;
 	protected String type;
 	protected String entityName;
-	protected String location;
-	protected LinkedList<Employee> listOfAttendees;
+	protected String streetAddress;
+	protected String city;
+	protected String state;
+	protected String zipCode;
+	protected String country;
+	protected List<Employee> listOfAttendees;
 	
 	//Constructors
-	public RecruitingEvent(GregorianCalendar inputUpdateTime, 
-			String inputType){
-		updateTime = inputUpdateTime;
-		type = inputType;
-	}
-	
-	public RecruitingEvent(GregorianCalendar inputEventDate, 
-			GregorianCalendar inputUpdateTime,
-			String inputType, String inputEntity, String inputLocation, 
-			LinkedList<Employee> attendees){
-		eventDate = inputEventDate;
-		updateTime = inputUpdateTime;
-		type = inputType;
-		entityName = inputEntity;
-		location = inputLocation;
-		listOfAttendees = attendees;
+	public RecruitingEvent(Calendar eventDate, 
+			Calendar updateTime,
+			String type, String entityName, 
+			String streetAddress, String city, String state, String zipCode, String country,
+			List<Employee> listOfAttendees){
+		this.eventDate = eventDate;
+		this.updateTime = updateTime;
+		this.type = type;
+		this.entityName = entityName;
+		this.streetAddress = streetAddress;
+		this.city = city;
+		this.state = state;
+		this.zipCode = zipCode;
+		this.country = country;
+		this.listOfAttendees = listOfAttendees;
 	}
 	
 	//Methods
 	
-	public GregorianCalendar getEventDate(){
+	public Calendar getEventDate(){
 		return eventDate;
 	}
 	
-	public void setEventDate(GregorianCalendar input){
-		eventDate = input;
+	public void setEventDate(Calendar eventDate){
+		this.eventDate = eventDate;
 	}
 
-	public GregorianCalendar getUpdateTime(){
+	public Calendar getUpdateTime(){
 		return updateTime;
+	}
+	
+	public void setUpdateTime(Calendar updateTime){
+		this.updateTime = updateTime;
 	}
 	
 	public String getType(){
@@ -53,7 +63,7 @@ public class RecruitingEvent {
 		type = input;
 	}
 	
-	public LinkedList<Employee> getListOfAttendees(){
+	public List<Employee> getListOfAttendees(){
 		return listOfAttendees;
 	}
 	
@@ -61,10 +71,6 @@ public class RecruitingEvent {
 		listOfAttendees.add(emp);
 	}
 
-	public static CallableStatement prepareGetID(RecruitingEvent rEvent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 
 }

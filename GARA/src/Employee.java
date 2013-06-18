@@ -7,15 +7,11 @@ public class Employee extends Person{
 		protected String contractFileId;
 		
 	//Constructors
-	Employee(Calendar update){
-		super(update);
-	}
-	
 	Employee(String inputFirst, String inputMiddle, String inputLast, 
 			String inputMaiden, String inputPreferred, String inputEmail,
 			String inputPhone, String inputStreetAddress, String inputCity,
 			String inputState, String inputZipCode, String inputCountry, 
-			String inputStatus, GregorianCalendar inputUpdateTime){
+			String inputStatus, Calendar inputUpdateTime){
 		super(inputFirst, inputMiddle, inputLast, inputMaiden, inputPreferred,
 				inputEmail, inputPhone, inputStreetAddress, inputCity,
 				inputState, inputZipCode, inputCountry, inputStatus, 

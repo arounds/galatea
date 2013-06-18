@@ -11,8 +11,7 @@ public class DocumentFactory {
 	
 	//Methods
 	public void createNewDocument(String type, Calendar submitDate, String title, String fileLocation) throws SQLException{
-		CallableStatement stmt = prepareInsertDocument(type, submitDate, title, fileLocation);
-		ResultSet result = DatabaseManager.callStatement(stmt);
+		ResultSet result = callInsertDocument(type, submitDate, title, fileLocation);
 		//parse result
 	}
 	public void getExistingDocument(String type, Calendar submitDate, String title, String fileLocation){
@@ -21,13 +20,16 @@ public class DocumentFactory {
 	public void updateExistingDocument(String type, Calendar submitDate, String title, String fileLocation){
 		//TODO call the stored procedure to create a new doc
 	}
-	public CallableStatement prepareSelectExistingDocument(String type, Calendar submitDate, String title, String fileLocation){
+	public ResultSet callSelectExistingDocument(String type, Calendar submitDate, String title, String fileLocation){
+		return null;
 		//TODO prepare the call to the stored procedure selectDocument
 	}
-	public CallableStatement prepareInsertDocument(String type, Calendar submitDate, String title, String fileLocation){
+	public ResultSet callInsertDocument(String type, Calendar submitDate, String title, String fileLocation){
+		return null;
 		//TODO prepare the call to the stored procedure insertDocument
 	}
-	public CallableStatement prepareUpdateDocument(String id, String type, Calendar submitDate, String title, String fileLocation){
+	public ResultSet callUpdateDocument(String id, String type, Calendar submitDate, String title, String fileLocation){
+		return null;
 		//TODO prepare the call to the stored procedure updateDocument
 	}
 	

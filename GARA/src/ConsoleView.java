@@ -1,16 +1,13 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.LinkedList;
 
 
 
 public class ConsoleView {
 	
 		//Declarations
-		ControllerInterface applicationManager;
+		ApplicationController applicationController;
 		//DatabaseController.registerDriver(); //Must happen but only once
 		String action = "0";
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -85,24 +82,6 @@ public class ConsoleView {
 				"Please enter what you would like to do: %n");
 	}
 	
-    protected static void getSchedulingEntries(BufferedReader in) throws ParseException, SQLException, IOException{
-    	LinkedList<SchedulingEntry> schedulingEntries = DatabaseController.callSelectSchedulingEntry();
-    	String action;
-    	
-    	System.out.printf(
-    			"%nYou can organize the Pipeline candidates on:" +
-    			"     * candidateFirstName %n" +
-    			"     * candidateLastName %n" +
-    			"     * currentInterviewType %n" +
-    			"     * currentInterviewStatus %n" +
-    			"     * currentInterviewDateTime %n" +
-    			"     * currentInterviewUpdateTime %n" +
-    			"     * currentInterviewerFirstName %n" +
-    			"     * currentInterviewerLastName %n");
-    	System.out.printf("%nOrganize entries on: ");
-    	action = in.readLine();
-    	//Print this list to the screen, and organize it(?)
-    }
 	
 	
 }

@@ -3,7 +3,6 @@ import java.util.Calendar;
 public class Person{
 	//Attributes
 		//Names
-	    protected String DBid;
 		protected String firstName;
 		protected String middleName;
 		protected String lastName;
@@ -21,12 +20,11 @@ public class Person{
 		protected final Calendar _updateTime;
 		
 	//Constructors
-		public Person(String DBid, String inputFirst, String inputMiddle, String inputLast, 
+		public Person(String inputFirst, String inputMiddle, String inputLast, 
 				String inputMaiden, String inputPreferred, String inputEmail,
 				String inputPhone, String inputStreetAddress, String inputCity,
 				String inputState, String inputZipCode, String inputCountry, 
 				String inputStatus, Calendar inputUpdateTime){
-			this.DBid = DBid;
 			firstName = inputFirst;
 			middleName = inputMiddle;
 			lastName = inputLast;

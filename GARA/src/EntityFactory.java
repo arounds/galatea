@@ -1,5 +1,3 @@
-import java.sql.SQLException;
-
 import com.google.cloud.sql.jdbc.CallableStatement;
 import com.google.cloud.sql.jdbc.ResultSet;
 
@@ -8,12 +6,12 @@ public class EntityFactory {
 
 	public Entity createNew(String name, String type, Person contact, 
 			String streetAddress, String city, String state, String zip, String country, 
-			String status, Boolean override) throws SQLException {
+			String status, Boolean override) throws Exception {
 		
 		ResultSet rs;
 		//Check DB for Entity name
 		rs = callDoesEntityNameExist(name);
-		Integer entity_id;
+		Integer entity_id = null;
 		while (rs.next()){
 			entity_id = rs.getInt("id");
 		}
@@ -26,20 +24,24 @@ public class EntityFactory {
 		
 		rs = null;
 		
-		rs = PersonFactory.
+		//Now get the contact id
+		
+		//Now insert the entity into the database
+		
+		//create the entity object
 
 		
-		return entity;
+		return null;
 	}
 
 
-	public ResultSet callDoesEntityNameExist(String name) {
+	public static ResultSet callDoesEntityNameExist(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
-	public <Entity> Entity updateExisting() {
+	public Entity updateExisting() {
 		Entity entity = null;
 		
 		// TODO Auto-generated method stub
@@ -49,7 +51,7 @@ public class EntityFactory {
 	}
 
 
-	public <A> A getExisting() {
+	public Entity getExisting() {
 		// TODO Auto-generated method stub
 		return null;
 	}

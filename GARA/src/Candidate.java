@@ -8,11 +8,7 @@ public class Candidate extends Person{
 		protected List<InterviewingEvent> listOfInterviewingEvents;
 		protected String resumeFileId;
 	
-	//Constructors
-		public Candidate(Calendar update){
-			super(update);
-		}
-		
+	//Constructors		
 		public Candidate(String inputFirst, String inputMiddle, String inputLast, 
 				String inputMaiden, String inputPreferred, String inputEmail,
 				String inputPhone, String inputStreetAddress, String inputCity,

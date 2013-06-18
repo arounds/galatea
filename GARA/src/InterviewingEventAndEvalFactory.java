@@ -1,40 +1,41 @@
 import com.google.cloud.sql.jdbc.CallableStatement;
+import com.google.cloud.sql.jdbc.ResultSet;
 
 
 public class InterviewingEventAndEvalFactory {
 
 
-	public <A> A createNew() {
+	public InterviewingEvent createNewEvent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
-	public <A> A updateExisting() {
+	public InterviewingEvent updateExistingEvent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
-	public <A> A getExisting() {
+	public InterviewingEvent getExistingEvent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
-	public CallableStatement prepareInsert() {
+	public ResultSet callInsertEvent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
-	public CallableStatement prepareUpdate() {
+	public ResultSet callUpdateEvent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 
-	public CallableStatement prepareSelect() {
+	public ResultSet callSelectEvent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
