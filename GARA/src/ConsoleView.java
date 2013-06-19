@@ -8,7 +8,6 @@ public class ConsoleView {
 	
 		//Declarations
 		ApplicationController applicationController;
-		//DatabaseController.registerDriver(); //Must happen but only once
 		String action = "0";
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		

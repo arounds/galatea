@@ -1,7 +1,5 @@
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.google.cloud.sql.jdbc.CallableStatement;
@@ -10,139 +8,306 @@ import com.google.cloud.sql.jdbc.ResultSet;
 
 
 public class PersonFactory {
-
-	public Person createNew(String firstName, 
-			String middleName, String lastName, 
-			String maidenName, String preferredName, 
-			String email, String phone, 
-			String streetAddress, String city, 
-			String state, String zipCode, String country, 
-			String status, RecruitingEvent rEvent, 
-			String docTitle, Calendar docSubmitDate, String docFileId, 
-			String personType, Boolean override) throws SQLException {
-		//Variables
-		Calendar updateTime = null;
-		Person person = null;
-		ResultSet result;
-		Integer rEvent_id = null;
-		Integer entity_id = null;
-		Integer doc_id = null;
+	/**
+	 * Creates Person objects and facilitates interaction between the Controller and the DatabaseManager.
+	 * 
+	 * @author 	rounds
+	 * @updated 2013-06-19 04:43 PM
+	 */
+	//Attributes
+	protected DatabaseManager databaseManager;
+	public enum PersonType{
+		CANDIDATE, EMPLOYEE, RECRUITER
+	}
+	
+	//Constructors
+	public PersonFactory(){};
+	
+	public PersonFactory(DatabaseManager databaseManager){
+		this.databaseManager = databaseManager;
+	}
+	
+	//Methods
+/*-------------------------------------------------------------------------------------------------------------------------*/	
+	public Boolean checkIfPersonExists(String firstName, String lastName) {
+		/**
+		 * Checks if there is a person in the database with the given first and last names.
+		 * Returns True if a person does exist.
+		 * 
+		 * @author 	rounds
+		 * @updated 2013-06-19 01:31 PM
+		 * 
+		 * @param	exists	a boolean valued 'true' if a person exists in the database with the given name
+		 * @param 	stmt 	a CallableStatement to the stored procedure doesPersonFirstLastNameExist
+		 * @param	rs		the ResultSet from stmt, containing a Boolean value
+		 * @return	exists 	
+		 */
 		
-		
-		//Check if person is in the database
+		CallableStatement stmt = prepareCall_doesPersonFirstLastNameExist(firstName, lastName);
+		ResultSet rs = null;
 		try{
-			result = callDoesPersonFirstLastNameExist(firstName, lastName);
-			List<String> idList = new LinkedList<String>();
-			//get results
-			while (result.next()){
-				String id = result.getString("id");
-				idList.add(id);
-			}
-			if (idList.size() == 0){  //ie. if there is no person with this name
-				//continue
-			}
-			else {  //ie. there is at least one person with this name
-				if (override){
-					//continue
-				}
-				else if (! override){
-					//return an error to the controller
-					//I think we want to create an exception that will handle this...
-				}
-			}
+			rs = databaseManager.callStatement(stmt);
 		}
 		catch (SQLException ex){
 			
 		}
-		
-		//reinitialize result
-		result = null;
-		
-		//Find id for entity
-		try{
-			result = EntityFactory.callDoesEntityNameExist(rEvent.entityName);
-			while (result.next()){
-				entity_id = result.getInt("id"); //since Entity.name is unique in the db, this only loops once
-			}
-			
-			
-			//reinitialize result
-			result = null;
-		
-			//Find id for recruiting event
-			result = RecruitingEventFactory.callDoesRecruitingEventExist(rEvent.eventDate, rEvent.type, entity_id.toString());
-			//interpret result
-			while (result.next()){
-				rEvent_id = result.getInt("id");
-			}
-		}
-		catch (SQLException ex){
-			
-		}
-		catch (NullPointerException ex){
-			//break and tell controller that entity cant be null
-		}
-		
-		//reinitialize result 
-		result = null;
-		//Create the document and get the id
-		result = DocumentFactory.callInsert(docSubmitDate, docTitle, docFileId);
-		
-		
-		//reinitialize result
-		result = null;
-		//Insert the person into the database
-		result = insertPerson(firstName, middleName, lastName, 
-				maidenName, preferredName, personType, email, phone, 
-				streetAddress, city, state, zipCode, country, rEvent_id, doc_id, status);
-		while (result.next()){
-			Timestamp updateTimestamp = result.getTimestamp("updateTime");
-			updateTime.setTimeInMillis(updateTimestamp.getTime());
-		}
-		//Create the Person object
-			//Determine which constructor to use based on personType
-		
-		
-		//Return the created person
-		return person;
+		Boolean exists = interpretResultSet_existance(rs);
+		return exists;
 	}
 
-	public static ResultSet callDoesPersonFirstLastNameExist(String firstName,
-			String lastName) {
+/*-------------------------------------------------------------------------------------------------------------------------*/
+	protected Boolean interpretResultSet_existance(ResultSet rs) {
+		/**
+		 * Extracts a boolean value from a ResultSet.
+		 * Can be used with any stored procedure which 
+		 * returns a single Boolean value. Currently used for 
+		 * any stored procedure in the database ending with the word
+		 * 'Exist'.
+		 * 
+		 * @author 	rounds
+		 * @updated 2013-06-19 04:54 PM
+		 * 
+		 * @param
+		 * @return
+		 */
+		
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+/*-------------------------------------------------------------------------------------------------------------------------*/	
+	protected CallableStatement prepareCall_doesPersonFirstLastNameExist(
+			String firstName, String lastName) {
+		/**
+		 * Prepares the CallableStatement to call procedure doesPersonFirstLastNameExist.
+		 * 
+		 * + doesPersonFirstLastNameExist(VARCHAR(50) firstName, VARCHAR(50) lastName) : BOOLEAN exists
+		 * 
+		 * @author 	rounds
+		 * @updated 2013-06-19 04:54 PM
+		 * 
+		 * @param 	stmt	the CallableStatement
+		 * @return	stmt
+		 */
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+/*-------------------------------------------------------------------------------------------------------------------------*/
 	public Person updateExisting(String firstName, 
 			String middleName, String lastName, 
 			String maidenName, String preferredName, 
-			String email, String phone, 
+			String type, String email, String phone, 
 			String streetAddress, String city, 
 			String state, String zipCode, String country, 
 			String status, List<RecruitingEvent> listREvents, String docFileId) {
+		/**
+		 * What does this method do?
+		 * How does it do it, briefly?
+		 * 
+		 * @author 	rounds
+		 * @updated 2013-06-19 01:31 PM
+		 * 
+		 * @param
+		 * @return
+		 */
 
 		return null;
 	}
-
+/*-------------------------------------------------------------------------------------------------------------------------*/
 	public Person getExisting(String firstName, String lastName) {
+		/**
+		 * What does this method do?
+		 * How does it do it, breifly?
+		 * 
+		 * @author 	rounds
+		 * @updated 2013-06-19 01:31 PM
+		 * 
+		 * @param
+		 * @return
+		 */
 
 		return null;
 	}
 
-	public ResultSet insertPerson(String firstName, String middleName, String lastName, 
+
+
+
+
+
+
+
+/*-------------------------------------------------------------------------------------------------------------------------*/
+	public Person createPersonObject(String firstName,
+			String middleName, String lastName, String maidenName,
+			String preferredName, PersonType type, String email,
+			String phone, String streetAddress, String city, String state,
+			String zipCode, String country, String status, RecruitingEvent rEvent, Document doc) {
+		/**
+		 * Creates a Person object with the given values.
+		 * It determines which constructor to use based on the personType.
+		 * 
+		 * @author 	rounds
+		 * @updated 2013-06-19 01:31 PM
+		 * 
+		 * @param 	person	a Person object.
+		 * @return	person
+		 */
+		Person person = null;
+		
+		switch (type){
+		case CANDIDATE: 
+			person = new Candidate(firstName, middleName, lastName, maidenName, preferredName, 
+					email, phone, streetAddress, city, state, zipCode, country, status, null, rEvent, null, doc);
+			break;
+		case EMPLOYEE:
+			person = new Employee(firstName, middleName, lastName, maidenName, preferredName, 
+					email, phone, streetAddress, city, state, zipCode, country, status, null);
+			break;
+		case RECRUITER:
+			person = new Recruiter(firstName, middleName, lastName, maidenName, preferredName, 
+					email, phone, streetAddress, city, state, zipCode, country, status, null);
+			break;
+		}
+		
+		return person;
+	}
+/*-------------------------------------------------------------------------------------------------------------------------*/
+	public Person getPerson(Integer person_id) {
+		/**
+		 * What does this method do?
+		 * How does it do it, breifly?
+		 * 
+		 * @author 	rounds
+		 * @updated 2013-06-19 01:31 PM
+		 * 
+		 * @param
+		 * @return
+		 */
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+/*-------------------------------------------------------------------------------------------------------------------------*/
+	public List<Integer> getPersonId(String firstName, String lastName) {
+		/**
+		 * What does this method do?
+		 * How does it do it, breifly?
+		 * 
+		 * @author 	rounds
+		 * @updated 2013-06-19 01:31 PM
+		 * 
+		 * @param
+		 * @return
+		 */
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+/*-------------------------------------------------------------------------------------------------------------------------*/
+	public Calendar insertPerson(Person person, String personType,
+			Integer rEvent_id, Integer doc_id) {
+		/**
+		 * What does this method do?
+		 * How does it do it, breifly?
+		 * 
+		 * @author 	rounds
+		 * @updated 2013-06-19 01:31 PM
+		 * 
+		 * @param
+		 * @return
+		 */
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+/*-------------------------------------------------------------------------------------------------------------------------*/
+	public ResultSet prepareSelect(String id) throws SQLException {
+		
+		/** Prepares a call to the selectPerson stored procedure and 
+		 * executes that statement. 
+		 * The ResultSet contains all information on that person.
+		 * 
+		 * Note: I use the id to select a person because it is reliable to 
+		 * select a specific person. Searching for a person's id number 
+		 * should be performed in a separate method (ie. callDoesPersonFirstLastNameExist).
+		 */
+		
+		Connection conn = databaseManager.getConnection();
+		
+		CallableStatement stmt = conn.prepareCall("{CALL selectPerson(?)}");
+		stmt.setString(1, id);
+
+		ResultSet result = databaseManager.callStatement(stmt);
+		return result;
+	}
+/*-------------------------------------------------------------------------------------------------------------------------*/
+	public Calendar updatePerson(Integer person_id, Person person, String personType,
+			Integer rEvent_id, Integer doc_id) {
+		/**
+		 * What does this method do?
+		 * How does it do it, breifly?
+		 * 
+		 * @author 	rounds
+		 * @updated 2013-06-19 01:31 PM
+		 * 
+		 * @param
+		 * @return
+		 */
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+/*-------------------------------------------------------------------------------------------------------------------------*/
+	public ResultSet updatePerson(String id, String firstName, String middleName, String lastName, 
+			String maidenName, String preferredName, String personType, String email, String phone, 
+			String streetAddress, String city, 
+			String state, String zipCode, String country, String rEvent_id, String doc_id, 
+			String status) throws SQLException {
+		
+		/** Prepares a call to the updatePerson stored procedure and 
+		 * executes that statement. 
+		 * The ResultSet contains the database updateTime.
+		 */
+		
+		CallableStatement stmt = databaseManager.connection.prepareCall("{CALL updatePerson(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+		stmt.setString(1, id);
+		stmt.setString(2, firstName);
+		stmt.setString(3, middleName);
+		stmt.setString(4, lastName);
+		stmt.setString(5, maidenName);
+		stmt.setString(6, preferredName);
+		stmt.setString(7, personType);
+		stmt.setString(8, email);
+		stmt.setString(9, phone);
+		stmt.setString(10, streetAddress);
+		stmt.setString(11, city);
+		stmt.setString(12, state);
+		stmt.setString(13, zipCode);
+		stmt.setString(14, country);
+		stmt.setString(15, doc_id);
+		stmt.setString(16, rEvent_id);
+		stmt.setString(17, status);
+		
+		ResultSet result = databaseManager.callStatement(stmt);
+		return result;
+	}
+	
+	///////////////////////////////////////////////////////
+	/////////////////// ARCHIVED //////////////////////////
+	///////////////////////////////////////////////////////
+	
+	public ResultSet ARCHIVEDinsertPerson(String firstName, String middleName, String lastName, 
 			String maidenName, String preferredName, String personType, String email, String phone, 
 			String streetAddress, String city, 
 			String state, String zipCode, String country, Integer rEvent_id, Integer doc_id, 
 			String status) throws SQLException{
 		
-		/* Prepares a call to the insertPerson stored procedure and 
-		 * executes that statement. 
-		 * The ResultSet contains the database updateTime.
+		/** Prepares a call to the insertPerson stored procedure.
+		 *  
+		 * 
 		 */
-		
-		    Connection conn = DatabaseManager.getConnection();
 			
-			CallableStatement stmt = conn.prepareCall("{CALL insertPerson(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+			CallableStatement stmt = databaseManager.connection.prepareCall("{CALL insertPerson(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			stmt.setString(1, firstName);
 			stmt.setString(2, middleName);
 			stmt.setString(3, lastName);
@@ -170,65 +335,9 @@ public class PersonFactory {
 			}
 			stmt.setString(16, status);
 			
-			ResultSet result = DatabaseManager.callStatement(stmt);
+			ResultSet result = databaseManager.callStatement(stmt);
 			return result;
 	}
 
-
-	public ResultSet updatePerson(String id, String firstName, String middleName, String lastName, 
-			String maidenName, String preferredName, String personType, String email, String phone, 
-			String streetAddress, String city, 
-			String state, String zipCode, String country, String rEvent_id, String doc_id, 
-			String status) throws SQLException {
-		
-		/* Prepares a call to the updatePerson stored procedure and 
-		 * executes that statement. 
-		 * The ResultSet contains the database updateTime.
-		 */
-		
-		Connection conn = DatabaseManager.getConnection();
-		
-		CallableStatement stmt = conn.prepareCall("{CALL updatePerson(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-		stmt.setString(1, id);
-		stmt.setString(2, firstName);
-		stmt.setString(3, middleName);
-		stmt.setString(4, lastName);
-		stmt.setString(5, maidenName);
-		stmt.setString(6, preferredName);
-		stmt.setString(7, personType);
-		stmt.setString(8, email);
-		stmt.setString(9, phone);
-		stmt.setString(10, streetAddress);
-		stmt.setString(11, city);
-		stmt.setString(12, state);
-		stmt.setString(13, zipCode);
-		stmt.setString(14, country);
-		stmt.setString(15, doc_id);
-		stmt.setString(16, rEvent_id);
-		stmt.setString(17, status);
-		
-		ResultSet result = DatabaseManager.callStatement(stmt);
-		return result;
-	}
-
-	public ResultSet prepareSelect(String id) throws SQLException {
-		
-		/* Prepares a call to the selectPerson stored procedure and 
-		 * executes that statement. 
-		 * The ResultSet contains all information on that person.
-		 * 
-		 * Note: I use the id to select a person because it is reliable to 
-		 * select a specific person. Searching for a person's id number 
-		 * should be performed in a separate method (ie. callDoesPersonFirstLastNameExist).
-		 */
-		
-		Connection conn = DatabaseManager.getConnection();
-		
-		CallableStatement stmt = conn.prepareCall("{CALL selectPerson(?)}");
-		stmt.setString(1, id);
-
-		ResultSet result = DatabaseManager.callStatement(stmt);
-		return result;
-	}
 
 }

@@ -6,7 +6,7 @@ public class Candidate extends Person{
 		//Events
 		protected RecruitingEvent recruitingEvent;
 		protected List<InterviewingEvent> listOfInterviewingEvents;
-		protected String resumeFileId;
+		protected Document doc;
 	
 	//Constructors		
 		public Candidate(String inputFirst, String inputMiddle, String inputLast, 
@@ -14,12 +14,14 @@ public class Candidate extends Person{
 				String inputPhone, String inputStreetAddress, String inputCity,
 				String inputState, String inputZipCode, String inputCountry, 
 				String inputStatus, Calendar inputUpdateTime, 
-				RecruitingEvent inputRecruitingEvent, List<InterviewingEvent> interviewingEvents){
+				RecruitingEvent inputRecruitingEvent, List<InterviewingEvent> interviewingEvents, Document doc){
 			super(inputFirst, inputMiddle, inputLast, inputMaiden, inputPreferred,
 					inputEmail, inputPhone, inputStreetAddress, inputCity,
 					inputState, inputZipCode, inputCountry, inputStatus, 
 					inputUpdateTime);
-			recruitingEvent = inputRecruitingEvent;
+			this.recruitingEvent = inputRecruitingEvent;
+			this.listOfInterviewingEvents = interviewingEvents;
+			this.doc = doc;
 		}
 	
 	//Methods
@@ -58,7 +60,7 @@ public class Candidate extends Person{
 		str.append(zipCode);
 		str.append(country);
 		str.append(status);
-		str.append(_updateTime);
+		str.append(updateTime);
 		
 		value = str.toString();
 		

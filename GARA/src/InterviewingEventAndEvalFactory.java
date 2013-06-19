@@ -3,8 +3,16 @@ import com.google.cloud.sql.jdbc.ResultSet;
 
 
 public class InterviewingEventAndEvalFactory {
+	
+	//Attributes
+		protected DatabaseManager databaseManager;
+		
+	//Constructors
+	public InterviewingEventAndEvalFactory(DatabaseManager databaseManager){
+		this.databaseManager = databaseManager;
+	}
 
-
+	//Methods
 	public InterviewingEvent createNewEvent() {
 		// TODO Auto-generated method stub
 		return null;

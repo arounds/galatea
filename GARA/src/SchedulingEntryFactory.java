@@ -12,7 +12,16 @@ import com.google.cloud.sql.jdbc.ResultSet;
 
 
 public class SchedulingEntryFactory {
+	
+	//Attributes
+	protected DatabaseManager databaseManager;
+		
+	//Constructors
+	public SchedulingEntryFactory(DatabaseManager databaseManager){
+		this.databaseManager = databaseManager;
+	}
 
+	//Methods
 	public List<SchedulingEntry> getEntries() throws SQLException, ParseException {
 
 		List<SchedulingEntry> schedulingEntries = null;

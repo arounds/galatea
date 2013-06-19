@@ -17,7 +17,7 @@ public class Person{
 		protected String zipCode;
 		protected String country;
 		protected String status;
-		protected final Calendar _updateTime;
+		protected Calendar updateTime;
 		
 	//Constructors
 		public Person(String inputFirst, String inputMiddle, String inputLast, 
@@ -38,7 +38,7 @@ public class Person{
 			zipCode = inputZipCode;
 			country = inputCountry;
 			status = inputStatus;
-			_updateTime = inputUpdateTime;
+			updateTime = inputUpdateTime;
 		}
 		
 	//Methods
@@ -148,6 +148,10 @@ public class Person{
 		}
 		
 		public Calendar getUpdateTime(){
-			return _updateTime;
+			return updateTime;
+		}
+		
+		public void setUpdateTime(Calendar updateTime){
+			this.updateTime = updateTime;
 		}
 }

@@ -3,7 +3,16 @@ import com.google.cloud.sql.jdbc.ResultSet;
 
 
 public class EntityFactory {
+	
+	//Attributes
+		protected DatabaseManager databaseManager;
+		
+	//Constructors
+	public EntityFactory(DatabaseManager databaseManager){
+		this.databaseManager = databaseManager;
+	}
 
+	//Methods
 	public Entity createNew(String name, String type, Person contact, 
 			String streetAddress, String city, String state, String zip, String country, 
 			String status, Boolean override) throws Exception {
@@ -20,6 +29,7 @@ public class EntityFactory {
 			if (! override){
 				throw new Exception("Entity already exists");
 			}
+		
 		}
 		
 		rs = null;

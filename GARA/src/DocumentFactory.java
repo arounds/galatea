@@ -7,7 +7,13 @@ import com.google.cloud.sql.jdbc.ResultSet;
 
 public class DocumentFactory {
 	
+	//Attributes
+	protected DatabaseManager databaseManager;
+	
 	//Constructors
+	public DocumentFactory(DatabaseManager databaseManager){
+		this.databaseManager = databaseManager;
+	}
 	
 	//Methods
 	public void createNewDocument(String type, Calendar submitDate, String title, String fileLocation) throws SQLException{
@@ -31,6 +37,10 @@ public class DocumentFactory {
 	public ResultSet callUpdateDocument(String id, String type, Calendar submitDate, String title, String fileLocation){
 		return null;
 		//TODO prepare the call to the stored procedure updateDocument
+	}
+	public Integer getDocumentId(Document doc) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
