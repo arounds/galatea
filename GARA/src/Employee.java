@@ -1,10 +1,13 @@
 import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.List;
+
 
 
 public class Employee extends Person{
 	//Attributes
-		protected String contractFileId;
+	protected List<RecruitingEvent> listOfRecruitingEvents;
+	protected List<InterviewingEvent> listOfInterviewingEvents;
+	protected Document contract;
 		
 	//Constructors
 	Employee(String inputFirst, String inputMiddle, String inputLast, 
@@ -16,8 +19,33 @@ public class Employee extends Person{
 				inputEmail, inputPhone, inputStreetAddress, inputCity,
 				inputState, inputZipCode, inputCountry, inputStatus, 
 				inputUpdateTime);
+		this.listOfRecruitingEvents = null;
+		this.listOfInterviewingEvents = null;
+		this.contract = null;
 	}
 	//Methods
+	public List<RecruitingEvent> getlistOfRecruitingEvents(){
+		return listOfRecruitingEvents;
+	}
 	
+	public void addRecruitingEvent(RecruitingEvent event){
+		listOfRecruitingEvents.add(event);
+	}
+	
+	public List<InterviewingEvent> getlistOfInterviewingEvents(){
+		return listOfInterviewingEvents;
+	}
+	
+	public void addInterviewingEvent(InterviewingEvent event){
+		listOfInterviewingEvents.add(event);
+	}
+	
+	public Document getContract(){
+		return contract;
+	}
+	
+	public void setContract(Document contract){
+		this.contract = contract;
+	}
 
 }

@@ -4,25 +4,15 @@ public class InterviewEvaluation {
 	//Attributes
 	protected String interviewerFirstName;
 	protected String interviewerLastName;
-	protected String evaluationFileID;
-	protected final Calendar _updateTime;
+	protected Document evaluation;
+	protected Calendar updateTime;
 	
 	//Constructors
-	public InterviewEvaluation(Calendar update){
-		_updateTime = update;
-	}
-	
-	public InterviewEvaluation(String firstName, String lastName, Calendar update){
-		interviewerFirstName = firstName;
-		interviewerFirstName = lastName;
-		_updateTime = update;
-	}
-	
-	public InterviewEvaluation(String firstName, String lastName, String fileId, Calendar update){
+	public InterviewEvaluation(String firstName, String lastName, Document evaluation, Calendar update){
 		interviewerFirstName = firstName;
 		interviewerLastName = lastName;
-		evaluationFileID = fileId;
-		_updateTime = update;
+		this.evaluation = evaluation;
+		updateTime = update;
 	}
 	
 	//Methods
@@ -30,28 +20,32 @@ public class InterviewEvaluation {
 		return interviewerFirstName;
 	}
 	
-	public void setInterviewerFirstName(String x){
-		interviewerFirstName = x;
+	public void setInterviewerFirstName(String interviewerFirstName){
+		this.interviewerFirstName = interviewerFirstName;
 	}
 	
 	public String getInterviewerLastName(){
 		return interviewerLastName;
 	}
 	
-	public void setInterviewerLastName(String x){
-		interviewerLastName = x;
+	public void setInterviewerLastName(String interviewerLastName){
+		this.interviewerLastName = interviewerLastName;
 	}
 	
-	public String getEvaluationFileID(){
-		return evaluationFileID;
+	public Document getEvaluation(){
+		return evaluation;
 	}
 	
-	public void setEvaluationFileID(String x){
-		evaluationFileID = x;
+	public void setEvaluation(Document evaluation){
+		this.evaluation = evaluation;
 	}
 	
 	public Calendar getUpdateTime(){
-		return _updateTime;
+		return updateTime;
+	}
+	
+	public void setUpdateTime(Calendar updateTime){
+		this.updateTime = updateTime;
 	}
 	
 }

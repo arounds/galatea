@@ -54,8 +54,95 @@ public class PersonFactory {
 		Boolean exists = interpretResultSet_existance(rs);
 		return exists;
 	}
+	
+/*-------------------------------------------------------------------------------------------------------------------------*/
+	public Candidate createCandidateObject(Person person, RecruitingEvent rEvent,
+			List<InterviewingEvent> listOfInterviewingEvents, Document resume) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+/*-------------------------------------------------------------------------------------------------------------------------*/
+	public Person createEmployeeObject(Person person,
+			List<RecruitingEvent> listOfRecruitingEvents,
+			List<InterviewingEvent> listOfInterviewingEvents, Document contract) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 /*-------------------------------------------------------------------------------------------------------------------------*/
+	public Person createPersonObject(String firstName,
+			String middleName, String lastName, String maidenName,
+			String preferredName, PersonType type, String email,
+			String phone, String streetAddress, String city, String state,
+			String zipCode, String country, String status, RecruitingEvent rEvent, Document doc) {
+		/**
+		 * Creates a Person object with the given values.
+		 * It determines which constructor to use based on the personType.
+		 * 
+		 * @author 	rounds
+		 * @updated 2013-06-19 01:31 PM
+		 * 
+		 * @param 	person	a Person object.
+		 * @return	person
+		 */
+		Person person = null;
+		
+		switch (type){
+		case CANDIDATE: 
+			person = new Candidate(firstName, middleName, lastName, maidenName, preferredName, 
+					email, phone, streetAddress, city, state, zipCode, country, status, null, rEvent, null, doc);
+			break;
+		case EMPLOYEE:
+			person = new Employee(firstName, middleName, lastName, maidenName, preferredName, 
+					email, phone, streetAddress, city, state, zipCode, country, status, null);
+			break;
+		case RECRUITER:
+			person = new Recruiter(firstName, middleName, lastName, maidenName, preferredName, 
+					email, phone, streetAddress, city, state, zipCode, country, status, null);
+			break;
+		}
+		
+		return person;
+	}
+	
+	/*-------------------------------------------------------------------------------------------------------------------------*/
+	public Calendar insertPerson(Person person, PersonType personType,
+			Integer rEvent_id, Integer doc_id) {
+		/**
+		 * Inserts the person into the database
+		 * 
+		 * @author 	rounds
+		 * @updated 2013-06-20 09:41 AM
+		 * 
+		 * @param	stmt		a CallableStatement calling the insertPerson procedure
+		 * @param	rs			the ResultSet from the insertPerson procedure, containing an updateTime
+		 * @param	updateTime	a Calendar object representing the time the person was updated in the database
+		 * @return	updateTime
+		 */
+		ResultSet rs = null;
+		
+		
+		CallableStatement stmt = prepareCall_insertPerson(person, personType.toString(), rEvent_id, doc_id);
+		try {
+			rs = databaseManager.callStatement(stmt);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Calendar updateTime = interpretResultSet_updateTime(rs);
+		
+		return updateTime;
+	}
+	
+	protected CallableStatement prepareCall_insertPerson(Person person,
+			String personType, Integer rEvent_id, Integer doc_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*-------------------------------------------------------------------------------------------------------------------------*/
 	protected Boolean interpretResultSet_existance(ResultSet rs) {
 		/**
 		 * Extracts a boolean value from a ResultSet.
@@ -63,6 +150,26 @@ public class PersonFactory {
 		 * returns a single Boolean value. Currently used for 
 		 * any stored procedure in the database ending with the word
 		 * 'Exist'.
+		 * 
+		 * @author 	rounds
+		 * @updated 2013-06-19 04:54 PM
+		 * 
+		 * @param
+		 * @return
+		 */
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/*-------------------------------------------------------------------------------------------------------------------------*/
+	protected Calendar interpretResultSet_updateTime(ResultSet rs) {
+		/**
+		 * Extracts a Calendar instance from a ResultSet.
+		 * Can be used with any stored procedure which 
+		 * returns an sql TIMESTAMP. Currently used for 
+		 * any stored procedure in the database which inserts
+		 * or updates an entry. 
 		 * 
 		 * @author 	rounds
 		 * @updated 2013-06-19 04:54 PM
@@ -130,52 +237,11 @@ public class PersonFactory {
 	}
 
 
-
-
-
-
-
-
-/*-------------------------------------------------------------------------------------------------------------------------*/
-	public Person createPersonObject(String firstName,
-			String middleName, String lastName, String maidenName,
-			String preferredName, PersonType type, String email,
-			String phone, String streetAddress, String city, String state,
-			String zipCode, String country, String status, RecruitingEvent rEvent, Document doc) {
-		/**
-		 * Creates a Person object with the given values.
-		 * It determines which constructor to use based on the personType.
-		 * 
-		 * @author 	rounds
-		 * @updated 2013-06-19 01:31 PM
-		 * 
-		 * @param 	person	a Person object.
-		 * @return	person
-		 */
-		Person person = null;
-		
-		switch (type){
-		case CANDIDATE: 
-			person = new Candidate(firstName, middleName, lastName, maidenName, preferredName, 
-					email, phone, streetAddress, city, state, zipCode, country, status, null, rEvent, null, doc);
-			break;
-		case EMPLOYEE:
-			person = new Employee(firstName, middleName, lastName, maidenName, preferredName, 
-					email, phone, streetAddress, city, state, zipCode, country, status, null);
-			break;
-		case RECRUITER:
-			person = new Recruiter(firstName, middleName, lastName, maidenName, preferredName, 
-					email, phone, streetAddress, city, state, zipCode, country, status, null);
-			break;
-		}
-		
-		return person;
-	}
 /*-------------------------------------------------------------------------------------------------------------------------*/
 	public Person getPerson(Integer person_id) {
 		/**
 		 * What does this method do?
-		 * How does it do it, breifly?
+		 * How does it do it, briefly?
 		 * 
 		 * @author 	rounds
 		 * @updated 2013-06-19 01:31 PM
@@ -191,7 +257,7 @@ public class PersonFactory {
 	public List<Integer> getPersonId(String firstName, String lastName) {
 		/**
 		 * What does this method do?
-		 * How does it do it, breifly?
+		 * How does it do it, briefly?
 		 * 
 		 * @author 	rounds
 		 * @updated 2013-06-19 01:31 PM
@@ -203,23 +269,7 @@ public class PersonFactory {
 		// TODO Auto-generated method stub
 		return null;
 	}
-/*-------------------------------------------------------------------------------------------------------------------------*/
-	public Calendar insertPerson(Person person, String personType,
-			Integer rEvent_id, Integer doc_id) {
-		/**
-		 * What does this method do?
-		 * How does it do it, breifly?
-		 * 
-		 * @author 	rounds
-		 * @updated 2013-06-19 01:31 PM
-		 * 
-		 * @param
-		 * @return
-		 */
-		
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 /*-------------------------------------------------------------------------------------------------------------------------*/
 	public ResultSet prepareSelect(String id) throws SQLException {
 		
@@ -241,11 +291,11 @@ public class PersonFactory {
 		return result;
 	}
 /*-------------------------------------------------------------------------------------------------------------------------*/
-	public Calendar updatePerson(Integer person_id, Person person, String personType,
+	public Calendar updatePerson(Integer person_id, Person person, PersonType personType,
 			Integer rEvent_id, Integer doc_id) {
 		/**
 		 * What does this method do?
-		 * How does it do it, breifly?
+		 * How does it do it, briefly?
 		 * 
 		 * @author 	rounds
 		 * @updated 2013-06-19 01:31 PM
@@ -338,6 +388,10 @@ public class PersonFactory {
 			ResultSet result = databaseManager.callStatement(stmt);
 			return result;
 	}
+
+
+
+
 
 
 }

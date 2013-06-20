@@ -16,32 +16,36 @@ public class DocumentFactory {
 	}
 	
 	//Methods
-	public void createNewDocument(String type, Calendar submitDate, String title, String fileLocation) throws SQLException{
-		ResultSet result = callInsertDocument(type, submitDate, title, fileLocation);
-		//parse result
-	}
-	public void getExistingDocument(String type, Calendar submitDate, String title, String fileLocation){
-		//TODO call the stored procedure to create a new doc
-	}
-	public void updateExistingDocument(String type, Calendar submitDate, String title, String fileLocation){
-		//TODO call the stored procedure to create a new doc
+
+	public ResultSet callInsertDocument(String type, Calendar submitDate, String title, String fileLocation){
+		return null;
+		//TODO prepare the call to the stored procedure insertDocument
 	}
 	public ResultSet callSelectExistingDocument(String type, Calendar submitDate, String title, String fileLocation){
 		return null;
 		//TODO prepare the call to the stored procedure selectDocument
 	}
-	public ResultSet callInsertDocument(String type, Calendar submitDate, String title, String fileLocation){
-		return null;
-		//TODO prepare the call to the stored procedure insertDocument
-	}
 	public ResultSet callUpdateDocument(String id, String type, Calendar submitDate, String title, String fileLocation){
 		return null;
 		//TODO prepare the call to the stored procedure updateDocument
+	}
+	public void createNewDocument(String type, Calendar submitDate, String title, String fileLocation) throws SQLException{
+		ResultSet result = callInsertDocument(type, submitDate, title, fileLocation);
+		//parse result
 	}
 	public Integer getDocumentId(Document doc) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+	public void getExistingDocument(String type, Calendar submitDate, String title, String fileLocation){
+		//TODO call the stored procedure to create a new doc
+	}
+	public Document getPersonsDocument(Integer person_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void updateExistingDocument(String type, Calendar submitDate, String title, String fileLocation){
+		//TODO call the stored procedure to create a new doc
+	}
 
 }

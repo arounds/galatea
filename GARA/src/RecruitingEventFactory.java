@@ -1,4 +1,5 @@
 import java.util.Calendar;
+import java.util.List;
 
 import com.google.cloud.sql.jdbc.CallableStatement;
 import com.google.cloud.sql.jdbc.ResultSet;
@@ -42,10 +43,7 @@ public class RecruitingEventFactory {
 	}
 
 
-	public CallableStatement prepareInsert() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 	public ResultSet callUpdate() {
@@ -70,7 +68,16 @@ public class RecruitingEventFactory {
 		return null;
 	}
 
-
+	public List<RecruitingEvent> getEmployeesRecruitingEvents(Integer person_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public RecruitingEvent getPersonsRecruitingEvent(Integer person_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public Integer getRecruitingEventId(RecruitingEvent rEvent) {
 		/**
 		 * Obtains the database id for the given recruiting event.
@@ -83,5 +90,13 @@ public class RecruitingEventFactory {
 		
 		return null;
 	}
+	
+	public CallableStatement prepareInsert() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 
 }

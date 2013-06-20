@@ -42,6 +42,14 @@ public class Candidate extends Person{
 		listOfInterviewingEvents.add(event);
 	}
 	
+	public Document getDocument(){
+		return doc;
+	}
+	
+	public void setDocument(Document doc){
+		this.doc = doc;
+	}
+	
 	@Override
 	public String toString(){
 		StringBuilder str = new StringBuilder();
