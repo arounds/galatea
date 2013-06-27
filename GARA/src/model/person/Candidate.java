@@ -4,6 +4,7 @@ import model.*;
 import model.document.*;
 import model.entity.*;
 import model.interviewingEvent.*;
+import model.person.Person.PersonType;
 import model.recruitingEvent.*;
 import model.schedulingEntry.*;
 
@@ -14,25 +15,43 @@ public class Candidate extends Person{
 	//Attributes
 		//Events
 		protected RecruitingEvent recruitingEvent;
-		protected List<InterviewingEvent> listOfInterviewingEvents;
-		protected Document doc;
+		protected List<InterviewingEvent> interviewingEvents;
+		protected Document resume;
 	
 	//Constructors		
-		public Candidate(String inputFirst, String inputMiddle, String inputLast, 
-				String inputMaiden, String inputPreferred, String inputEmail,
-				String inputPhone, String inputStreetAddress, String inputCity,
-				String inputState, String inputZipCode, String inputCountry, 
-				String inputStatus, Calendar inputUpdateTime, 
-				RecruitingEvent inputRecruitingEvent, List<InterviewingEvent> interviewingEvents, Document doc){
-			super(inputFirst, inputMiddle, inputLast, inputMaiden, inputPreferred,
-					inputEmail, inputPhone, inputStreetAddress, inputCity,
-					inputState, inputZipCode, inputCountry, inputStatus, 
-					inputUpdateTime);
-			this.recruitingEvent = inputRecruitingEvent;
-			this.listOfInterviewingEvents = interviewingEvents;
-			this.doc = doc;
+		public Candidate(
+				Integer id, 
+				String firstName, 
+				String middleName, 
+				String lastName, 
+				String maidenName, 
+				String preferredName, 
+				Calendar updateTime, 
+				Calendar insertTime, 
+				PersonType type, 
+				String email,
+				String phone, 
+				String streetAddress, 
+				String city,
+				String state, 
+				String zip, 
+				String country, 
+				String status, 
+				RecruitingEvent recruitingEvent, 
+				List<InterviewingEvent> interviewingEvents, 
+				Document resume){
+			super(id, firstName, middleName, lastName, maidenName, preferredName, 
+					updateTime, insertTime,
+					type, email, phone, 
+					streetAddress, city, state, zip, country, 
+					resume.getId(), recruitingEvent.getId(), status);
+			this.recruitingEvent = recruitingEvent;
+			this.interviewingEvents = interviewingEvents;
+			this.resume = resume;
 		}
 	
+	public Candidate() {}
+
 	//Methods
 		//Events
     public RecruitingEvent getRecruitingEvent(){
@@ -44,44 +63,19 @@ public class Candidate extends Person{
 	}
 	
 	public List<InterviewingEvent> getInterviewingEvents(){
-		return listOfInterviewingEvents;
+		return interviewingEvents;
 	}
 	
 	public void addInterviewingEvent(InterviewingEvent event){
-		listOfInterviewingEvents.add(event);
+		interviewingEvents.add(event);
 	}
 	
 	public Document getDocument(){
-		return doc;
+		return resume;
 	}
 	
-	public void setDocument(Document doc){
-		this.doc = doc;
+	public void setDocument(Document resume){
+		this.resume = resume;
 	}
 	
-	@Override
-	public String toString(){
-		StringBuilder str = new StringBuilder();
-		String value;
-		
-		str.append(firstName);
-		str.append(middleName);
-		str.append(lastName);
-		str.append(maidenName);
-		str.append(preferredName);
-		str.append(email);
-		str.append(phone);
-		str.append(streetAddress);
-		str.append(city);
-		str.append(state);
-		str.append(zipCode);
-		str.append(country);
-		str.append(status);
-		str.append(updateTime);
-		
-		value = str.toString();
-		
-		
-		return value;
-	}
 }

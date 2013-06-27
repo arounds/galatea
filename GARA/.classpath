@@ -5,5 +5,7 @@
 	<classpathentry kind="lib" path="/home/rounds/Documents/gcommandtool/google_sql.jar"/>
 	<classpathentry kind="lib" path="/home/rounds/Downloads/hamcrest-core-1.3.jar"/>
 	<classpathentry kind="lib" path="/home/rounds/Downloads/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="/home/rounds/Downloads/spring-jdbc-2.5.4.jar"/>
+	<classpathentry kind="lib" path="/home/rounds/Downloads/commons-cli-1.2-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

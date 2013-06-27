@@ -19,6 +19,8 @@ import com.google.cloud.sql.jdbc.CallableStatement;
 import com.google.cloud.sql.jdbc.Connection;
 import com.google.cloud.sql.jdbc.ResultSet;
 
+import database.DatabaseManager;
+
 
 public class SchedulingEntryFactory {
 	
@@ -63,7 +65,7 @@ public class SchedulingEntryFactory {
 	}
 
 	public ResultSet callSelect() throws SQLException {
-		Connection conn = DatabaseManager.getConnection();
+		Connection conn = databaseManager.getConnection();
 		Statement stmt = conn.createStatement();
 		stmt.execute("CALL selectSchedulingEntry");
 		ResultSet rs = (ResultSet) stmt.getResultSet();

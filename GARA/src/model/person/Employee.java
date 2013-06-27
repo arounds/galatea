@@ -4,6 +4,7 @@ import model.*;
 import model.document.*;
 import model.entity.*;
 import model.interviewingEvent.*;
+import model.person.Person.PersonType;
 import model.recruitingEvent.*;
 import model.schedulingEntry.*;
 
@@ -14,39 +15,43 @@ import java.util.List;
 
 public class Employee extends Person{
 	//Attributes
-	protected List<RecruitingEvent> listOfRecruitingEvents;
-	protected List<InterviewingEvent> listOfInterviewingEvents;
+	protected List<RecruitingEvent> recruitingEvents;
+	protected List<InterviewingEvent> interviewingEvents;
 	protected Document contract;
 		
 	//Constructors
-	Employee(String inputFirst, String inputMiddle, String inputLast, 
-			String inputMaiden, String inputPreferred, String inputEmail,
-			String inputPhone, String inputStreetAddress, String inputCity,
-			String inputState, String inputZipCode, String inputCountry, 
-			String inputStatus, Calendar inputUpdateTime){
-		super(inputFirst, inputMiddle, inputLast, inputMaiden, inputPreferred,
-				inputEmail, inputPhone, inputStreetAddress, inputCity,
-				inputState, inputZipCode, inputCountry, inputStatus, 
-				inputUpdateTime);
-		this.listOfRecruitingEvents = null;
-		this.listOfInterviewingEvents = null;
-		this.contract = null;
+	public Employee(Integer id, String firstName, String middleName, String lastName, 
+			String maidenName, String preferredName, Calendar updateTime, 
+			Calendar insertTime, PersonType type, String email,
+			String phone, String streetAddress, String city,
+			String state, String zip, String country, 
+			Integer doc_id, Integer rEvent_id, String status, 
+			List<RecruitingEvent> recruitingEvents, List<InterviewingEvent> interviewingEvents, 
+			Document contract){
+		super(id, firstName, middleName, lastName, maidenName, preferredName, 
+				updateTime, insertTime,
+				type, email, phone, 
+				streetAddress, city, state, zip, country, 
+				doc_id, rEvent_id, status);
+		this.recruitingEvents = recruitingEvents;
+		this.interviewingEvents = interviewingEvents;
+		this.contract = contract;
 	}
 	//Methods
-	public List<RecruitingEvent> getlistOfRecruitingEvents(){
-		return listOfRecruitingEvents;
+	public List<RecruitingEvent> getRecruitingEvents(){
+		return recruitingEvents;
 	}
 	
 	public void addRecruitingEvent(RecruitingEvent event){
-		listOfRecruitingEvents.add(event);
+		recruitingEvents.add(event);
 	}
 	
 	public List<InterviewingEvent> getlistOfInterviewingEvents(){
-		return listOfInterviewingEvents;
+		return interviewingEvents;
 	}
 	
 	public void addInterviewingEvent(InterviewingEvent event){
-		listOfInterviewingEvents.add(event);
+		interviewingEvents.add(event);
 	}
 	
 	public Document getContract(){

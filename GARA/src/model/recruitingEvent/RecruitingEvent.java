@@ -16,44 +16,65 @@ import com.google.cloud.sql.jdbc.CallableStatement;
 import com.google.cloud.sql.jdbc.ResultSet;
 
 public class RecruitingEvent {
+	public enum RecruitingEventType{
+		CAREER_FAIR, REFERRAL, RESUME_DUMP, WEBSITE
+	}
+	
 	//Attributes
-	protected Calendar eventDate;
+	protected Integer id;
 	protected Calendar updateTime;
-	protected String type;
-	protected String entityName;
+	protected Calendar insertTime; 
+	protected Calendar eventDateTime; 
+	protected RecruitingEventType type;
+	protected Integer entity_id;
+	protected Integer description_id;
 	protected String streetAddress;
 	protected String city;
 	protected String state;
-	protected String zipCode;
+	protected String zip;
 	protected String country;
-	protected List<Employee> listOfAttendees;
+	protected Entity entity; 
+	protected Document description;
+	protected List<Employee> attendees;
 	
 	//Constructors
-	public RecruitingEvent(Calendar eventDate, 
-			Calendar updateTime,
-			String type, String entityName, 
-			String streetAddress, String city, String state, String zipCode, String country,
-			List<Employee> listOfAttendees){
-		this.eventDate = eventDate;
+	public RecruitingEvent(Integer id, 
+			Calendar updateTime, Calendar insertTime, Calendar eventDateTime, 
+			RecruitingEventType type, Integer entity_id, Integer description_id, 
+			String streetAddress, String city, String state, String zip, String country,
+			Entity entity, Document description,
+			List<Employee> attendees){
+		this.id = id;
 		this.updateTime = updateTime;
+		this.insertTime = insertTime;
+		this.eventDateTime = eventDateTime;
 		this.type = type;
-		this.entityName = entityName;
+		this.entity_id = entity_id;
+		this.description_id = description_id;
 		this.streetAddress = streetAddress;
 		this.city = city;
 		this.state = state;
-		this.zipCode = zipCode;
+		this.zip = zip;
 		this.country = country;
-		this.listOfAttendees = listOfAttendees;
+		this.entity = entity;
+		this.description = description;
+		this.attendees = attendees;
 	}
 	
 	//Methods
-	
-	public Calendar getEventDate(){
-		return eventDate;
+	public Integer getId(){
+		return id;
 	}
 	
-	public void setEventDate(Calendar eventDate){
-		this.eventDate = eventDate;
+	public void setId(Integer id){
+		this.id = id;
+	}
+	public Calendar getEventDateTime(){
+		return eventDateTime;
+	}
+	
+	public void setEventDateTime(Calendar eventDateTime){
+		this.eventDateTime = eventDateTime;
 	}
 
 	public Calendar getUpdateTime(){
@@ -64,20 +85,20 @@ public class RecruitingEvent {
 		this.updateTime = updateTime;
 	}
 	
-	public String getType(){
+	public RecruitingEventType getType(){
 		return type;
 	}
 	
-	public void setType(String input){
-		type = input;
+	public void setType(RecruitingEventType type){
+		this.type = type;
 	}
 	
-	public List<Employee> getListOfAttendees(){
-		return listOfAttendees;
+	public List<Employee> getAttendees(){
+		return attendees;
 	}
 	
 	public void addAttendee(Employee emp){
-		listOfAttendees.add(emp);
+		this.attendees.add(emp);
 	}
 
 	

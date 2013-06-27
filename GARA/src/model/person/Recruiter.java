@@ -17,10 +17,7 @@ public class Recruiter extends Person{
 			String inputPhone, String inputStreetAddress, String inputCity,
 			String inputState, String inputZipCode, String inputCountry, 
 			String inputStatus, Calendar inputUpdateTime) {
-		super(inputFirst, inputMiddle, inputLast, inputMaiden, inputPreferred,
-				inputEmail, inputPhone, inputStreetAddress, inputCity,
-				inputState, inputZipCode, inputCountry, inputStatus, 
-				inputUpdateTime);
+		super();
 	}
 
 

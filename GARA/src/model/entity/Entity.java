@@ -11,18 +11,20 @@ import java.util.Calendar;
 
 public class Entity {
 	//Attributes
+	protected Integer id;
 		protected String name;
+		protected Calendar updateTime;
+		protected Calendar insertTime;
 		protected String type;
+		protected Integer contact_id;
 		protected String website;
-		protected Recruiter contact;
 		protected String streetAddress;
 		protected String city;
 		protected String state;
 		protected String zipCode;
 		protected String country;
 		protected String status;
-		protected final Calendar _updateTime;
-	
+		protected Recruiter contact;
 	//Constructors
 		public Entity(String name, String type, String website, 
 				Recruiter contact,
@@ -39,7 +41,7 @@ public class Entity {
 			this.zipCode = zipCode;
 			this.country = country;
 			this.status = status;
-			this._updateTime = updateTime;
+			this.updateTime = updateTime;
 		}
 		
 	//Methods
@@ -124,7 +126,7 @@ public class Entity {
 		}
 		
 		public Calendar getUpdateTime(){
-			return _updateTime;
+			return updateTime;
 		}
 
 }

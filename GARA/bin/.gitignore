@@ -1,10 +1,6 @@
-/Playground.class
-/Document.class
-/PersonFactory$Type.class
-/PersonFactory$PersonType.class
-/view
-/person
-/interviewingEvent
-/entity
-/model
 /controller
+/view
+/model
+/Main.class
+/database
+/FirstTest.class

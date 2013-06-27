@@ -9,6 +9,8 @@ import model.schedulingEntry.*;
 
 import com.google.cloud.sql.jdbc.CallableStatement;
 import com.google.cloud.sql.jdbc.ResultSet;
+
+import database.DatabaseManager;
 import model.*;
 
 

@@ -12,22 +12,34 @@ import java.util.Calendar;
 
 public class Document {
 	//Attributes
-	protected String title;
-	protected Calendar submitDate;
+	protected Integer id;
 	protected Calendar updateTime;
+	protected Calendar insertTime;
 	protected String type;
-	protected String fileId;
+	protected Calendar submitDate;
+	protected String title;
+	protected String fileLocation;
 	
 	//Constructors
-	public Document (String title, Calendar submitDate, Calendar updateTime, String type, String fileId){
-		this.title = title;
-		this.submitDate = submitDate;
+	public Document (Integer id, Calendar updateTime, Calendar insertTime,  String type, Calendar submitDate, String title, String fileLocation){
+		this.id = id;
 		this.updateTime = updateTime;
+		this.insertTime = insertTime;
 		this.type = type;
-		this.fileId = fileId;
+		this.submitDate = submitDate;
+		this.title = title;
+		this.fileLocation = fileLocation;
 	}
 	
 	//Methods
+	
+	public Integer getId(){
+		return id;
+	}
+	
+	public void setId(Integer id){
+		this.id = id;
+	}
 	
 	public String getTitle(){
 		return title;
@@ -61,12 +73,12 @@ public class Document {
 		this.type = type;
 	}
 	
-	public String getFileId(){
-		return fileId;
+	public String getFileLocation(){
+		return fileLocation;
 	}
 	
-	public void setFileId(String fileId){
-		this.fileId = fileId;
+	public void setFileLocation(String fileLocation){
+		this.fileLocation = fileLocation;
 	}
 
 }

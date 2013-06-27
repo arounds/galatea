@@ -1,14 +1,14 @@
-package model;
+package database;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 import com.google.cloud.sql.jdbc.CallableStatement;
 import com.google.cloud.sql.jdbc.Connection;
 import com.google.cloud.sql.jdbc.ResultSet;
 
-
 public class DatabaseManager {
-	
+
 	public Connection connection;
 	
 	public DatabaseManager(){}
@@ -27,9 +27,8 @@ public class DatabaseManager {
 	}
 	
 	public ResultSet callStatement(CallableStatement stmt) throws SQLException{
-		stmt.execute();
+		stmt.executeQuery();
 		ResultSet rs = (ResultSet) stmt.getResultSet();
 		return rs;
 	}
-
 }

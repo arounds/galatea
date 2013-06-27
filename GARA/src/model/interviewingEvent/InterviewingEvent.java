@@ -12,10 +12,14 @@ import java.util.Calendar;
 
 public class InterviewingEvent {
 	//Attributes
-	protected Calendar eventDate;
-	protected final Calendar _updateTime;
+	protected Integer id;
+	protected Integer candidate_id;
+	protected Calendar updateTime;
+	protected Calendar insertTime;
+	protected Calendar eventDateTime;
 	protected String type;
 	protected String status;
+	protected Candidate candidate;
 	protected List<InterviewEvaluation> listOfInterviewEvals;
 	
 	//Constructors
@@ -24,24 +28,33 @@ public class InterviewingEvent {
 			Calendar inputUpdateTime, 
 			String inputType, String inputStatus, 
 			List<InterviewEvaluation> interviewEvals){
-		eventDate = inputEventDate;
-		_updateTime = inputUpdateTime;
+		eventDateTime = inputEventDate;
+		updateTime = inputUpdateTime;
 		type = inputType;
 		status = inputStatus;
 		listOfInterviewEvals = interviewEvals;
 	}
 	
 	//Methods
+	
+	public Integer getId(){
+		return id;
+	}
+	
+	public void setId(Integer id){
+		this.id = id;
+	}
+	
 	public Calendar getEventDate(){
-		return eventDate;
+		return eventDateTime;
 	}
 	
 	public void setEventDate(Calendar input){
-		eventDate = input;
+		eventDateTime = input;
 	}
 
 	public Calendar getUpdateTime(){
-		return _updateTime;
+		return updateTime;
 	}
 	
 	public String getType(){
