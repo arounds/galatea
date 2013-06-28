@@ -3,8 +3,15 @@ package controller;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
+
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+
 import database.DatabaseManager;
-import database.MockManager;
 import model.*;
 import model.document.*;
 import model.entity.*;
@@ -36,7 +43,6 @@ public class ApplicationController {
 	
 	//Constructors
 	public ApplicationController(){
-		viewController = new ViewController();
 		databaseManager = new DatabaseManager();
 		documentFactory = new DocumentFactory(databaseManager);
 		entityFactory = new EntityFactory(databaseManager);
@@ -44,6 +50,10 @@ public class ApplicationController {
 		personFactory = new PersonFactory(databaseManager);
 		recruitingEventFactory = new RecruitingEventFactory(databaseManager);
 		schedulingEntryFactory = new SchedulingEntryFactory(databaseManager);
+	}
+	
+	public void setViewController(ViewController viewController){
+		this.viewController = viewController;
 	}
 
 //Methods
@@ -60,8 +70,6 @@ public class ApplicationController {
 	 * @updated	2013-06-19 12:20 PM	
 	 * 
 	 */
-	public void start() {
-		}
 	
 	public Candidate manageCreateNewCandidate(
 			String firstName, 
@@ -83,7 +91,14 @@ public class ApplicationController {
 			RecruitingEvent recruitingEvent,
 			Document resume){
 		//Check if candidate exists
+		Boolean userOverride = null;
+		do{
+		userOverride = userOverrideIfPersonExists(firstName, lastName);  //if person exists, user must decide whether to create the person or not
+		} while (userOverride==null);
 		
+		if (! userOverride){ //if the user does NOT want to create the candidate anyway
+			return null;
+		}
 		
 		//Call PersonFactory to create and insert
 		Candidate candidate = null;
@@ -115,9 +130,27 @@ public class ApplicationController {
 		
 	}
 
+	private Boolean userOverrideIfPersonExists(String firstName, String lastName) {
+		Boolean exists = personFactory.doesPersonExist(firstName, lastName);
+		Boolean action = true;
+		if (exists){
+			action = viewController.doesUserWantToCreateNewPerson();
+		}
+		
+		return action;
+		
+	}
 
-
-
+	public void start() {
+		//register driverManager
+		
+		//print initial greeting
+		
+		//create commandline stuffs
+		
+	}
+	
+	
 
 }
 

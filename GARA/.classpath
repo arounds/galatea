@@ -7,5 +7,7 @@
 	<classpathentry kind="lib" path="/home/rounds/Downloads/junit-4.11.jar"/>
 	<classpathentry kind="lib" path="/home/rounds/Downloads/spring-jdbc-2.5.4.jar"/>
 	<classpathentry kind="lib" path="/home/rounds/Downloads/commons-cli-1.2-src.zip"/>
+	<classpathentry kind="lib" path="/home/rounds/Downloads/dbunit-2.4.9.jar"/>
+	<classpathentry kind="lib" path="/home/rounds/Downloads/commons-cli-1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

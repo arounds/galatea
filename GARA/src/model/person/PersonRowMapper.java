@@ -10,6 +10,8 @@ import model.person.Person.PersonType;
 import org.springframework.jdbc.core.RowMapper;
 
 public class PersonRowMapper implements RowMapper{
+	
+	public PersonRowMapper(){}
 
 	@Override
 	public Person mapRow(ResultSet rs, int rowNumber) throws SQLException {
@@ -38,7 +40,7 @@ public class PersonRowMapper implements RowMapper{
 		return person;
 	}
 	
-	protected static Calendar dateToCalendar(Date date){
+	protected Calendar dateToCalendar(Date date){
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		return cal;

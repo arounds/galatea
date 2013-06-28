@@ -124,6 +124,11 @@ public class PersonFactory {
 		return stmt;
 	}
 
+	public Boolean doesPersonExist(String firstName, String lastName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 
