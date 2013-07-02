@@ -1,13 +1,8 @@
 package database;
 
-import static org.junit.Assert.*;
-
 import java.sql.SQLException;
-
 import junit.framework.TestCase;
-
 import org.junit.Test;
-
 import com.google.cloud.sql.jdbc.CallableStatement;
 import com.google.cloud.sql.jdbc.ResultSet;
 

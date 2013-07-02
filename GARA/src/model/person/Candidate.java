@@ -1,13 +1,8 @@
 package model.person;
 
-import model.*;
 import model.document.*;
-import model.entity.*;
 import model.interviewingEvent.*;
-import model.person.Person.PersonType;
 import model.recruitingEvent.*;
-import model.schedulingEntry.*;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -76,6 +71,36 @@ public class Candidate extends Person{
 	
 	public void setDocument(Document resume){
 		this.resume = resume;
+	}
+	
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		String NEW_LINE = System.getProperty("line.separator");
+		
+		result.append(this.getClass().getName() + " Object {" + NEW_LINE);
+	    result.append(" First Name: " + firstName + NEW_LINE);
+	    result.append(" Middle Name: " + middleName + NEW_LINE);
+	    result.append(" Last Name: " + lastName + NEW_LINE);
+	    result.append(" Maiden Name: " + maidenName + NEW_LINE);
+	    result.append(" Preferred Name: " + preferredName + NEW_LINE);
+	    result.append(" Email: " + email + NEW_LINE);
+	    result.append(" Phone: " + phone + NEW_LINE );
+	    result.append(" Street Address: " + streetAddress + NEW_LINE);
+	    result.append(" City: " + city + NEW_LINE);
+	    result.append(" State: " + state + NEW_LINE);
+	    result.append(" Zip Code: " + zip + NEW_LINE);
+	    result.append(" Country: " + country + NEW_LINE);
+	    result.append(" Status: " + status + NEW_LINE);
+
+	    //Note that Collections and Maps also override toString
+	    result.append(" Recruiting Event: " + recruitingEvent + NEW_LINE);
+	    result.append(" Interviewing Events: " + interviewingEvents + NEW_LINE);
+	    result.append(" Resume: " + resume + NEW_LINE);
+	    result.append("}");
+	    
+	    return result.toString();
+
 	}
 	
 }

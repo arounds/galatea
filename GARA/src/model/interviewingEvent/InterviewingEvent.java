@@ -1,11 +1,6 @@
 package model.interviewingEvent;
 
-import model.*;
-import model.document.*;
-import model.entity.*;
 import model.person.*;
-import model.recruitingEvent.*;
-import model.schedulingEntry.*;
 
 import java.util.List;
 import java.util.Calendar;

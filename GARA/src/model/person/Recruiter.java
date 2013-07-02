@@ -1,23 +1,21 @@
 package model.person;
 
-import model.*;
-import model.document.*;
-import model.entity.*;
-import model.interviewingEvent.*;
-import model.recruitingEvent.*;
-import model.schedulingEntry.*;
-
 import java.util.Calendar;
 
 
 public class Recruiter extends Person{
 
-	public Recruiter(String inputFirst, String inputMiddle, String inputLast, 
-			String inputMaiden, String inputPreferred, String inputEmail,
-			String inputPhone, String inputStreetAddress, String inputCity,
-			String inputState, String inputZipCode, String inputCountry, 
-			String inputStatus, Calendar inputUpdateTime) {
-		super();
+	public Recruiter(Integer id, String firstName, String middleName, String lastName, 
+			String maidenName, String preferredName, Calendar updateTime, 
+			Calendar insertTime, PersonType type, String email,
+			String phone, String streetAddress, String city,
+			String state, String zip, String country, 
+			String status) {
+		super(id, firstName, middleName, lastName, maidenName, preferredName, 
+				updateTime, insertTime,
+				type, email, phone, 
+				streetAddress, city, state, zip, country, 
+				null, null, status);
 	}
 
 

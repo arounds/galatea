@@ -1,12 +1,5 @@
 package model.person;
 
-import model.*;
-import model.document.*;
-import model.entity.*;
-import model.interviewingEvent.*;
-import model.recruitingEvent.*;
-import model.schedulingEntry.*;
-
 import java.util.Calendar;
 
 public class Person{

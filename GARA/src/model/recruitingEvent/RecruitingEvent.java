@@ -1,19 +1,10 @@
 package model.recruitingEvent;
 
-import model.*;
 import model.document.*;
 import model.entity.*;
 import model.person.*;
-import model.interviewingEvent.*;
-import model.schedulingEntry.*;
-
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.LinkedList;
 import java.util.List;
-
-import com.google.cloud.sql.jdbc.CallableStatement;
-import com.google.cloud.sql.jdbc.ResultSet;
 
 public class RecruitingEvent {
 	public enum RecruitingEventType{

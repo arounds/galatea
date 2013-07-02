@@ -1,17 +1,11 @@
 package model.entity;
 
-import model.*;
-import model.document.*;
 import model.person.*;
-import model.interviewingEvent.*;
-import model.recruitingEvent.*;
-import model.schedulingEntry.*;
 
 import com.google.cloud.sql.jdbc.CallableStatement;
 import com.google.cloud.sql.jdbc.ResultSet;
 
 import database.DatabaseManager;
-import model.*;
 
 
 

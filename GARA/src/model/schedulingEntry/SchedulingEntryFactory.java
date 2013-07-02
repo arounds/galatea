@@ -1,21 +1,12 @@
 package model.schedulingEntry;
 
-import model.*;
-import model.document.*;
-import model.entity.*;
-import model.person.*;
-import model.interviewingEvent.*;
-import model.recruitingEvent.*;
-
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-import com.google.cloud.sql.jdbc.CallableStatement;
 import com.google.cloud.sql.jdbc.Connection;
 import com.google.cloud.sql.jdbc.ResultSet;
 

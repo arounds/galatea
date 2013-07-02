@@ -1,16 +1,8 @@
 package model.document;
 
-import model.*;
-import model.entity.*;
-import model.person.*;
-import model.interviewingEvent.*;
-import model.recruitingEvent.*;
-import model.schedulingEntry.*;
-
 import java.sql.SQLException;
 import java.util.Calendar;
 
-import com.google.cloud.sql.jdbc.CallableStatement;
 import com.google.cloud.sql.jdbc.ResultSet;
 
 import database.DatabaseManager;
