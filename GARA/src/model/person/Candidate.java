@@ -39,7 +39,8 @@ public class Candidate extends Person{
 					updateTime, insertTime,
 					type, email, phone, 
 					streetAddress, city, state, zip, country, 
-					resume.getId(), recruitingEvent.getId(), status);
+					1, 1, //TODO make these work with null recruitingEvent/Document
+					status);
 			this.recruitingEvent = recruitingEvent;
 			this.interviewingEvents = interviewingEvents;
 			this.resume = resume;

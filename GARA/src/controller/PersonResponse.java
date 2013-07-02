@@ -17,13 +17,17 @@ public class PersonResponse extends Response{
 		this.people = people;
 	}
 	
-	public PersonResponse(MessageType message){
+	public PersonResponse(String message){
 		super(message);
 	}
 	
-	public PersonResponse(List<? extends Person> people, MessageType message){
+	public PersonResponse(List<? extends Person> people, String message){
 		super(message);
 		this.people = people;
+	}
+
+	public List<? extends Person> getPeople() {
+		return people;
 	}
 	
 

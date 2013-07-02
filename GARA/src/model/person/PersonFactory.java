@@ -6,6 +6,7 @@ import model.recruitingEvent.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.google.cloud.sql.jdbc.CallableStatement;
@@ -69,8 +70,8 @@ public class PersonFactory {
  */
 	protected List<Person> insertPerson(Person person) throws SQLException {
 		
-		CallableStatement stmt = prepareCall_insertPerson(person);
-		ResultSet rs_person = databaseManager.callStatement(stmt);
+		CallableStatement stmt = prepareCall_insertPerson(person); System.out.println("i prepared the call.");
+		ResultSet rs_person = databaseManager.callStatement(stmt); System.out.println("i called and got a return statement.");
 		List<Person> newPerson = new ArrayList<Person>(1);
 		for(int i=1; rs_person.next(); i++){
 			Person nextPerson = personRowMapper.mapRow(rs_person, i);
@@ -79,6 +80,11 @@ public class PersonFactory {
 		if (newPerson.size()>1){
 			//throw an exception, but still return the list.
 			
+		}
+		if (newPerson.size()<1){
+			System.out.println("Insertion did not work.");
+			
+			return null;
 		}
 		return newPerson;
 	}
@@ -112,8 +118,9 @@ public class PersonFactory {
 			PersonType type, String email, String phone, String streetAddress,
 			String city, String state, String zip, String country,
 			String status, RecruitingEvent recruitingEvent, Document document) {
-		// TODO Auto-generated method stub
-		return null;
+		Calendar now = Calendar.getInstance();
+		Person person = new Person(1, "firstName", "middleName", "lastName", "lastName", "lastName", now, now, type, "lastName", "lastName", "lastName", "lastName", "lastName", "lastName", "lastName", 2, 3, "lastName");
+		return person;
 	}
 
 	public Candidate newCandidate(Person person,

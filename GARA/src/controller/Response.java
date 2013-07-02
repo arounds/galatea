@@ -2,29 +2,20 @@ package controller;
 
 public class Response {
 	
-	enum MessageType{
-		SUCCESS, 
-		ALREADY_EXISTS, 
-		FOREIGN_KEY_ERROR, 
-		TOO_MANY_RETURNED_ROWS, 
-		DOES_NOT_EXIST, 
-		CONNECTION_ERROR
-	}
-	
-	protected MessageType message;
+	protected String message;
 	
 	public Response(){
-		message = MessageType.SUCCESS;
+		message = "default";
 	}
 	
-	public Response(MessageType message){
+	public Response(String message){
 		this.message = message;
 	}
 
 	public String getMessage() {
-		return message.toString();
+		return message;
 	}
-	public void setMessage(MessageType message) {
+	public void setMessage(String message) {
 		this.message = message;
 	}
 
