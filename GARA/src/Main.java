@@ -1,5 +1,6 @@
 
 
+import java.sql.SQLException;
 import java.util.List;
 
 import model.person.Person;
@@ -17,26 +18,28 @@ import controller.PersonResponse;
  */
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		ApplicationController applicationController = new ApplicationController();
 		applicationController.start();
+		
+		testingDatabase(applicationController);
 		
 		String command = "createCandidate";
 		String[] arguments = new String[100];
 		
-		arguments[0] = "firstName";
-		arguments[1] = "middleName";
-		arguments[2] = "lastName";
-		arguments[3] = "maidenName";
-		arguments[4] = "preferredName";
-		arguments[5] = "email";
-		arguments[6] = "phone";
-		arguments[7] = "streetAddress";
-		arguments[8] = "city";
-		arguments[9] = "state";
-		arguments[10] = "zip";
-		arguments[11] = "country";
-		arguments[12] = "status";
+		arguments[1] = "Joe";
+		arguments[2] = "TheMan";
+		arguments[3] = "Schmoe";
+		arguments[4] = null;
+		arguments[5] = "Joey";
+		arguments[6] = "jschmoe@gmail.com";
+		arguments[7] = "555.555.5555";
+		arguments[8] = "21 Awesome Way";
+		arguments[9] = "Medford";
+		arguments[10] = "MA";
+		arguments[11] = "02155";
+		arguments[12] = "USA";
+		arguments[13] = "ACTIVE";
 
 		
 		if (command.equals("createCandidate")){
@@ -49,6 +52,17 @@ public class Main {
 		}
 	
 
+	}
+	
+	private static void testingDatabase(ApplicationController applicationController){
+		String response = "unsuccessful";
+		try {
+			response = applicationController.testDatabase();
+		} catch (SQLException e) {
+			System.out.println("Something happened");
+			e.printStackTrace();
+		}
+		System.out.println("FirstName should be Anika. It is: "+response);
 	}
 	
 

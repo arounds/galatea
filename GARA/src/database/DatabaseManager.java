@@ -11,7 +11,8 @@ public class DatabaseManager {
 
 	public Connection connection;
 	
-	public DatabaseManager(){}
+	public DatabaseManager() throws SQLException{
+	}
 	
 	public void setConnection() throws SQLException{
 		this.connection = getConnection();
@@ -27,7 +28,7 @@ public class DatabaseManager {
 	}
 	
 	public ResultSet callStatement(CallableStatement stmt) throws SQLException{
-		stmt.executeQuery();
+		stmt.execute();
 		ResultSet rs = (ResultSet) stmt.getResultSet();
 		return rs;
 	}

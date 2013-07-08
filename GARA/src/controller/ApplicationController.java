@@ -1,6 +1,10 @@
 package controller;
 import java.sql.SQLException;
 import java.util.List;
+
+import com.google.cloud.sql.jdbc.CallableStatement;
+import com.google.cloud.sql.jdbc.ResultSet;
+
 import database.DatabaseManager;
 import model.document.*;
 import model.entity.*;
@@ -9,7 +13,6 @@ import model.person.Person.PersonType;
 import model.interviewingEvent.*;
 import model.recruitingEvent.*;
 import model.schedulingEntry.*;
-import view.*;
 
 
 /**
@@ -30,7 +33,7 @@ public class ApplicationController {
 	protected SchedulingEntryFactory schedulingEntryFactory;
 	
 	//Constructors
-	public ApplicationController(){
+	public ApplicationController() throws SQLException{
 		databaseManager = new DatabaseManager();
 		documentFactory = new DocumentFactory(databaseManager);
 		entityFactory = new EntityFactory(databaseManager);
@@ -83,10 +86,16 @@ public class ApplicationController {
 		}
 		
 		//Call PersonFactory to create and insert
-		List<? extends Person> newCandidate = personFactory.createAndInsertNewPerson(
-				firstName, middleName, lastName, maidenName, preferredName, 
-				type, email, phone, streetAddress, city, state, zip, country, 
-				status, recruitingEvent, resume);
+		List<? extends Person> newCandidate = null;
+		try {
+			newCandidate = personFactory.createAndInsertNewPerson(
+					firstName, middleName, lastName, maidenName, preferredName, 
+					type, email, phone, streetAddress, city, state, zip, country, 
+					status, recruitingEvent, resume);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		PersonResponse newCandidateResponse = new PersonResponse(newCandidate);
 		return newCandidateResponse;
 		
@@ -99,7 +108,7 @@ public class ApplicationController {
 		return null;
 	}
 
-	public void start() {
+	public void start() throws SQLException {
 		//register driverManager
 		try {
 			databaseManager.registerDriver();
@@ -109,7 +118,30 @@ public class ApplicationController {
 			return;
 		}
 		
+		//get initial connection
+		databaseManager.setConnection();
 		
+		
+	}
+
+
+
+	public String testDatabase() throws SQLException {
+		CallableStatement stmt = prepareCallTest();
+		stmt.execute();
+		ResultSet rs = (ResultSet) stmt.getResultSet();
+		String firstName = null;
+		while (rs.next()){
+			firstName = rs.getString(1);
+		}
+		return firstName;
+	}
+
+
+
+	private CallableStatement prepareCallTest() throws SQLException {
+		CallableStatement stmt = databaseManager.connection.prepareCall("SELECT firstName FROM Person WHERE id = 2");
+		return stmt;
 	}
 	
 	

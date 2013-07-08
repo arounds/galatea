@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.RowMapperResultSetExtractor;
+
 import com.google.cloud.sql.jdbc.CallableStatement;
 import com.google.cloud.sql.jdbc.ResultSet;
 
@@ -24,13 +27,16 @@ public class PersonFactory {
 
 	//Attributes
 	protected DatabaseManager databaseManager;
-	protected PersonRowMapper personRowMapper;
+	protected RowMapper personRowMapper;
+	protected RowMapperResultSetExtractor rowMapperResultSetExtractor;
 	
 	//Constructors
 	public PersonFactory(){}
 	
 	public PersonFactory(DatabaseManager databaseManager){
 		this.databaseManager = databaseManager;
+		this.personRowMapper = new PersonRowMapper();
+		this.rowMapperResultSetExtractor = new RowMapperResultSetExtractor(personRowMapper);
 	}
 	
 	//Methods
@@ -40,43 +46,87 @@ public class PersonFactory {
 			String preferredName, PersonType type, String email, String phone,
 			String streetAddress, String city, String state, String zip,
 			String country, String status, RecruitingEvent recruitingEvent,
-			Document document) {
+			Document document) throws SQLException {
 		List<Person> people = new ArrayList<Person>(1);
 		
-		Person person = insertPerson(firstName, middleName, 
+		List<Person> person = insertPerson(firstName, middleName, 
 				lastName, maidenName, preferredName, type, email, phone, 
 				streetAddress, city, state, zip, country, 
 				status, recruitingEvent, document);
 		switch (type){
 		case CANDIDATE: 
-			Candidate candidate = newCandidate(person, recruitingEvent, document);
+			Candidate candidate = newCandidate(person.get(0), recruitingEvent, document);
 			people.add(candidate);
 			break;
 		case EMPLOYEE: 
-			Employee employee = newEmployee(person, document);
+			Employee employee = newEmployee(person.get(0), document);
 			people.add(employee);
 			break;
 		case RECRUITER:
-			Recruiter recruiter = newRecruiter(person);
+			Recruiter recruiter = newRecruiter(person.get(0));
 			people.add(recruiter);
 			break;
 		}
 		return people;
 	}
-/**
- * Prepares the CallableStatement, calls it and returns the result set.
- * @param person
- * @return
- */
-	protected List<Person> insertPerson(Person person) throws SQLException {
-		
-		CallableStatement stmt = prepareCall_insertPerson(person); System.out.println("i prepared the call.");
-		ResultSet rs_person = databaseManager.callStatement(stmt); System.out.println("i called and got a return statement.");
-		List<Person> newPerson = new ArrayList<Person>(1);
-		for(int i=1; rs_person.next(); i++){
-			Person nextPerson = personRowMapper.mapRow(rs_person, i);
-			newPerson.add(nextPerson);
+
+	protected CallableStatement prepareCall_insertPerson(Person person) throws SQLException {
+		CallableStatement stmt = databaseManager.connection.prepareCall("CALL insertPerson(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+		stmt.setString(1, person.firstName);
+		stmt.setString(2, person.middleName);
+		stmt.setString(3, person.lastName);
+		stmt.setString(4, person.maidenName);
+		stmt.setString(5, person.preferredName);
+		stmt.setString(6, person.type.toString());
+		stmt.setString(7, person.email);
+		stmt.setString(8, person.phone);
+		stmt.setString(9, person.streetAddress);
+		stmt.setString(10, person.city);
+		stmt.setString(11, "MA");
+		stmt.setString(12, person.zip);
+		stmt.setString(13, "USA");
+		if (person.doc_id == null){
+			stmt.setNull(14, java.sql.Types.INTEGER);
 		}
+		else {
+			stmt.setInt(14, person.doc_id);
+		}
+		if (person.recruitingEvent_id == null){
+			stmt.setNull(15, java.sql.Types.INTEGER);
+		}
+		else {
+			stmt.setInt(15, person.recruitingEvent_id);
+		}
+		stmt.setString(16, person.status);
+		return stmt;
+	}
+
+
+	public List<Person> insertPerson(String firstName, String middleName,
+			String lastName, String maidenName, String preferredName,
+			PersonType type, String email, String phone, String streetAddress,
+			String city, String state, String zip, String country,
+			String status, RecruitingEvent recruitingEvent, Document document) throws SQLException {
+		
+		Calendar now = Calendar.getInstance();
+		Person person = new Person(null, firstName, middleName, lastName, maidenName, preferredName, now, now, type, email, phone, streetAddress, city, state, zip, country, null, null, status);
+		CallableStatement stmt = null;
+		try{
+			stmt = prepareCall_insertPerson(person); //System.out.println("i prepared the call.");
+		}
+		catch (SQLException e){
+			e.printStackTrace();
+		}
+		ResultSet rs_person = null;
+		try{
+			rs_person = databaseManager.callStatement(stmt); //System.out.println("i called and got a return statement.");
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		List<Person> newPerson = rowMapperResultSetExtractor.extractData(rs_person);
+		
 		if (newPerson.size()>1){
 			//throw an exception, but still return the list.
 			
@@ -87,40 +137,7 @@ public class PersonFactory {
 			return null;
 		}
 		return newPerson;
-	}
-
-	protected CallableStatement prepareCall_insertPerson(Person person) throws SQLException {
-		CallableStatement stmt = databaseManager.connection.prepareCall("{CALL insertPerson(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-
-		stmt.setString("inputFirstName", person.getFirstName());
-		stmt.setString("inputMiddleName", person.getMiddleName());
-		stmt.setString("inputLastName", person.getLastName());
-		stmt.setString("inputMaidenName", person.getMaidenName());
-		stmt.setString("inputPreferredName", person.getPreferredName());
-		stmt.setString("inputType", person.getType().toString());
-		stmt.setString("inputEmail", person.getEmail());
-		stmt.setString("inputPhone", person.getPhone());
-		stmt.setString("inputStreetAddress", person.getStreetAddress());
-		stmt.setString("inputCity", person.getCity());
-		stmt.setString("inputState", person.getState());
-		stmt.setString("inputZip", person.getZip());
-		stmt.setString("inputCountry", person.getCountry());
-		stmt.setInt("inputDocument_id", person.getDocument_id());
-		stmt.setInt("inputRecruitingEvent_id", person.getRecruitingEvent_id());
-		stmt.setString("inputStatus", person.getStatus());
-	
-		return stmt;
-	}
-
-
-	public Person insertPerson(String firstName, String middleName,
-			String lastName, String maidenName, String preferredName,
-			PersonType type, String email, String phone, String streetAddress,
-			String city, String state, String zip, String country,
-			String status, RecruitingEvent recruitingEvent, Document document) {
-		Calendar now = Calendar.getInstance();
-		Person person = new Person(1, "firstName", "middleName", "lastName", "lastName", "lastName", now, now, type, "lastName", "lastName", "lastName", "lastName", "lastName", "lastName", "lastName", 2, 3, "lastName");
-		return person;
+		
 	}
 
 	public Candidate newCandidate(Person person,
@@ -150,10 +167,6 @@ public class PersonFactory {
 				person.status);
 		return recruiter;
 	}
-
-
-
-
 
 
 
